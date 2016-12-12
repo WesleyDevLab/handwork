@@ -29,12 +29,14 @@ import org.springframework.web.servlet.view.JstlView;
  */
 @EnableWebMvc
 @Configuration
-@ComponentScan({"rashjz.info.com.az"}) 
+@ComponentScan({"rashjz.info.com.az"})
 public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+        registry.addResourceHandler("/uploads/**").addResourceLocations("file:/home/rashad/uploads/");
+
     }
 
     @Bean
@@ -62,7 +64,6 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 //        resolver.setCookieMaxAge(4800);
 //        return resolver;
 //    }
-
     @Override //?lang=en
     public void addInterceptors(InterceptorRegistry registry) {
         LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();

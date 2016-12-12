@@ -51,6 +51,7 @@ public class ProfileController implements Serializable {
 
     @Inject
     private ConnectionRepository connectionRepository;
+    private static String UPLOAD_LOCATION = "/home/rashad/uploads/";
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String getProfilePage(Model model) {
@@ -61,7 +62,7 @@ public class ProfileController implements Serializable {
     @RequestMapping(value = "/uploadimage", method = RequestMethod.POST)
     public String doUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam("imagefile") MultipartFile file
     ) {
-        String UPLOAD_LOCATION = "D:/";
+//        String UPLOAD_LOCATION = "D:/";
         logger.info("--------------- " + "  file " + file.getOriginalFilename());
         try {
             if (file != null && !file.isEmpty()) {
@@ -113,6 +114,7 @@ public class ProfileController implements Serializable {
             UserRoles roles = new UserRoles();
             roles.setUserId(users);
             roles.setUserRoleId(1);
+            roles.setRole("ROLE_USER");
             userService.persist(users);
         }
         AppUser appUser = new AppUser(users, users.getUsername(), users.getPassword(), true, true, true, true, users.getUserRolesCollection());
