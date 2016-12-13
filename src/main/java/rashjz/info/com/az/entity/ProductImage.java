@@ -37,7 +37,7 @@ public class ProductImage implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "det_id")
-    private Integer detId;
+    public Integer detId;
     @Size(max = 545)
     @Column(name = "img_name")
     private String imgName;

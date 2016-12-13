@@ -47,7 +47,7 @@ public class AuthController implements Serializable {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getIndexPage(Model model) {
-        return "redirect:/products";
+        return "redirect:/index";
     }
 
     @RequestMapping(value = "/403", method = RequestMethod.GET)

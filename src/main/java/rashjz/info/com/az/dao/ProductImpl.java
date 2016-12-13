@@ -94,7 +94,7 @@ public class ProductImpl extends AbstractDao<Integer, Products> implements Seria
             criteria.setMaxResults(5);
             listProductses = criteria.list();
             for (int i = 0; i < listProductses.size(); i++) {
-                listImage.addAll(listProductses.get(i).getProducts().getProductImageCollection());
+                listImage.add((ProductImage) listProductses.get(i).getProducts().getProductImageCollection().toArray()[0]);
             }
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -120,10 +120,9 @@ public class ProductImpl extends AbstractDao<Integer, Products> implements Seria
                     if (entry.getKey().equals("categoryId")) {
                         List<Integer> list = (List<Integer>) entry.getValue();
                         //creating array of id where category in selected checkbox number 
-//                        Restrictions.in "catId" means where condition in() 
+//                        Restrictions.in "catId" means where condition in()
                         crit.createCriteria("p.categoryId", "categoryId", JoinType.INNER_JOIN, Restrictions.in("catId", list.toArray()));
                     }
-
                     if (entry.getKey().equals("brandId")) {
                         List<Integer> list = (List<Integer>) entry.getValue();
                         crit.createCriteria("p.brandId", "brandId", JoinType.INNER_JOIN, Restrictions.in("id", list.toArray()));

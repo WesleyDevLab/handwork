@@ -1890,7 +1890,7 @@ p span.val{
 	color:#f65a5b;
 }
 p span.overline{
-	text-decoration:line-through;
+	/*text-decoration:line-through;*/
 	color:#000;
 }
 .related.products-grid img {

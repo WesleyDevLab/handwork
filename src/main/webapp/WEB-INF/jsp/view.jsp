@@ -125,11 +125,11 @@
                         <h4>${product.categoryId.name} </h4>
                         <div class="simpleCart_shelfItem">
                             <p>
-                                <span class="item_price qwe">${product.price} AZN</span> <a href="#">Click for offer</a>
+                                <span style="font-weight: bold;" class="item_price qwe">Qiymət :  ${product.price} AZN</span> 
                             </p>
 
                             <form method="post" action="addtocard">
-                                <p class="qty">Qty ::</p>
+                                <p class="qty">Say :</p>
                                 <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                                 <input type="hidden" name="${_csrf.parameterName}" 	value="${_csrf.token}" />
                                 <input type="hidden" id="code" name="code"  value="1" />
@@ -141,8 +141,9 @@
 
                         </div>
                         <div class="flower-type">
-                            <p>Model  ::<a href="#">Gem Stone</a></p>
-                            <p>Carats  ::<a href="#">22</a></p>
+                            <p>Brend  :  ${product.brandId.name}</p>
+                            <p>Kateqoriya  :  ${product.categoryId.name}</p>
+                            <p>Əlavə edilib  :  ${product.insertDate}</p>
 
                         </div>
                         <p class="desc">
@@ -170,7 +171,7 @@
                         <div class="panel-heading" role="tab" id="headingOne">
                             <h4 class="panel-title">
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Description
+                                    Ətraflı
                                 </a>
                             </h4>
                         </div>
@@ -187,7 +188,7 @@
                 <!-- collapse -->
                 <!-- related products -->
                 <div class="related-products">
-                    <h3>Related Products</h3> 
+                    <h3>Uyğun Məhsullar</h3> 
                     <c:forEach items="${sameCatProducts}" var="pro" varStatus="index" >
                         <div class="col-md-4 related products-grid">
                             <img src="${pageContext.request.contextPath}/resources/images/19.jpg" alt=" " class="img-responsive">

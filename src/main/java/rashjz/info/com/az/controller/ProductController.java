@@ -15,20 +15,12 @@ import javax.swing.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import rashjz.info.com.az.domain.ListWrapper;
 import rashjz.info.com.az.domain.PagingResult;
-import rashjz.info.com.az.entity.Brand;
-import rashjz.info.com.az.entity.Category;
-import rashjz.info.com.az.entity.Gender;
 import rashjz.info.com.az.entity.ProductImage;
 import rashjz.info.com.az.entity.Products;
-import rashjz.info.com.az.service.BrandCategoryService;
-import rashjz.info.com.az.service.CategoryService;
-import rashjz.info.com.az.service.GenderCategoryServise;
 import rashjz.info.com.az.service.ProductService;
 import rashjz.info.com.az.util.ProductActionUtil;
 
@@ -43,35 +35,18 @@ public class ProductController implements Serializable {
 
     @Autowired
     private ProductService productService;
-
-    @Autowired
-    private CategoryService categoryService;
-
-    @Autowired
-    private BrandCategoryService brandCategoryService;
-
-    @Autowired
-    private GenderCategoryServise genderCategoryServise;
-
-    @ModelAttribute("listWrapper")
-    public ListWrapper BrendCatList() {
-        ListWrapper listWrapper = new ListWrapper();
-        listWrapper.setCategoryList(categoryService.getAll(Category.class));
-        listWrapper.setBrandCatList(brandCategoryService.getAll(Brand.class));
-        listWrapper.setGenders(genderCategoryServise.getAll(Gender.class));
-        return listWrapper;
-    }
-
+ 
+ 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String gethLoginPage(Model model) {
-        List<Products> list = (List<Products>) productService.getAll(Products.class);
+
         List<Products> listLast = productService.getLastProducts();
         List<ProductImage> listMost = productService.getMostProducts();
+        
         List<ProductImage> listLastImages = new ArrayList<>();
         for (int i = 0; i < listLast.size(); i++) {
-            listLastImages.addAll(listLast.get(i).getProductImageCollection());
-        }
-        System.out.println("=----------------- salam --" + listMost.get(0).getProductId().getPId());
+            listLastImages.add((ProductImage)listLast.get(i).getProductImageCollection().toArray()[0]);
+        } 
         model.addAttribute("content", 1);
         model.addAttribute("listLast", listLastImages);
         model.addAttribute("listMost", listMost);

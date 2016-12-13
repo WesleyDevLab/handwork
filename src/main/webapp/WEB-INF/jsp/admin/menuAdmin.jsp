@@ -8,9 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
     </head>
     <body>
         <nav class="navbar-default navbar-side" role="navigation">
@@ -19,13 +17,15 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a class="active-menu" href="${pageContext.request.contextPath}/index.html"><i class="fa fa-dashboard"></i>Users</a>
+                        <a class="active-menu" href="${pageContext.request.contextPath}/admin/users"><i class="fa fa-dashboard"></i>Users</a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath}/admin/products"><i class="fa fa-desktop"></i> Product</a>
                     </li>
                     <li>
-                        <a href="ui-elements.html"><i class="fa fa-desktop"></i> Order <span class="fa arrow"></span></a>
+                        <a href="#">
+                            <i class="fa fa-desktop"></i> Order <span class="fa arrow"></span>
+                        </a>
                         <ul class="nav nav-second-level active-menu">
                             <li>
                                 <a href="${pageContext.request.contextPath}/admin/checkoutList?typeId=3">Səbət</a>
@@ -49,30 +49,9 @@
                     </li>
 
                     <li>
-                        <a href="${pageContext.request.contextPath}/admin/admin/faqAdmin"><i class="fa fa-table"></i> FAQ</a>
-                    </li>
-                    <li>
-                        <a href="form.html"><i class="fa fa-edit"></i> Forms </a>
+                        <a href="${pageContext.request.contextPath}/admin/faqAdmin"><i class="fa fa-table"></i> FAQ</a>
                     </li>
 
-
-                    <li>
-                        <a href="#"><i class="fa fa-sitemap"></i> Category <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Category</a>
-                            </li>
-                            <li>
-                                <a href="#">Brand</a>
-                            </li>
-                            <li>
-                                <a href="#">Second Level Link</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="empty.html"><i class="fa fa-fw fa-file"></i> Empty Page</a>
-                    </li>
                 </ul>
 
             </div>

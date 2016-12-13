@@ -1,7 +1,7 @@
 <%--
     Document   : header
     Created on : Oct 25, 2016, 1:03:55 AM
-    Author     : Azik
+    Author     : Rashad Javadov
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,7 +17,7 @@
         <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
         <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
         <!-- js -->
-        <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/jquery-1.10.2.js"></script>
 
         <link href="${pageContext.request.contextPath}/resources/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
 

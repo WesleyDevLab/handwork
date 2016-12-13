@@ -20,18 +20,13 @@ import rashjz.info.com.az.domain.RegistrationForm;
  */
 @Controller
 @RequestMapping("/admin")
-public class ViewController implements Serializable{
-    
+public class ViewController implements Serializable {
+
     private static final Logger logger = LoggerFactory.getLogger(ViewController.class.getName());
-    
+
     @RequestMapping(value = "/indexAdmin", method = RequestMethod.GET)
     public String getLogin2Page(Model model) {
-        
         return "admin/indexAdmin";
     }
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public String getCategoryAdminPage(Model model) {
-        
-        return "admin/test";
-    }
+
 }

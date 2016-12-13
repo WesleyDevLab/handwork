@@ -49,20 +49,19 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
         session.setAttribute("authorities", authentication.getAuthorities());
         //set our response to OK status
         httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-        
-        Users user=authUser.getUsers();
+
+        Users user = authUser.getUsers();
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
         for (UserRoles grantedAuthority : user.getUserRolesCollection()) {
             authorities.add(new SimpleGrantedAuthority(grantedAuthority.getRole()));
         }
 
-        if(authorities.get(0).getAuthority().equals("ROLE_ADMIN")){     
+        if (authorities.get(0).getAuthority().equals("ROLE_ADMIN")) {
             httpServletResponse.sendRedirect("admin/indexAdmin");
-        }else if(authorities.get(0).getAuthority().equals("ROLE_USER")){
-            httpServletResponse.sendRedirect("checkout");
+        } else if (authorities.get(0).getAuthority().equals("ROLE_USER")) {
+            httpServletResponse.sendRedirect("/checkout");
         }
-        
 
     }
 

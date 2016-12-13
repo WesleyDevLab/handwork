@@ -9,12 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <!--<title>JSP Page</title>-->
     </head>
     <body>
-        <footer><p>All right reserved. Template by: <a href="http://webthemez.com">WebThemez</a></p>
-
-
-                    </footer>
+        <footer>
+            <!--<p>All right reserved. Template by: <a href="http://webthemez.com">WebThemez</a></p>--> 
+        </footer>
     </body>
 </html>

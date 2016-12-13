@@ -22,6 +22,7 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import rashjz.info.com.az.util.StaticParams;
 
 /**
  *
@@ -35,8 +36,7 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-        registry.addResourceHandler("/uploads/**").addResourceLocations("file:/home/rashad/uploads/");
-
+        registry.addResourceHandler("/uploads/**").addResourceLocations("file:/" + StaticParams.UPLOAD_LOCATION);
     }
 
     @Bean

@@ -13,11 +13,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!--        <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" media="screen"
-              href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">-->
+        <title>Opal.az - Admin</title>
+        <link rel="shortcut icon"  href="https://p.w3layouts.com/demos/pendent_store/web/images/cart1.png" type="image/png">
     </head>
     <body>
+
+
+
+
+
         <div id="wrapper">
             <jsp:include page="headerAdmin.jsp" />
             <jsp:include page="menuAdmin.jsp" />
@@ -29,7 +33,7 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-md-2 pull-right">
-                                        <a href="<c:url value="brand/add"/>" role="button" class="btn btn-info  btn " aria-pressed="true"  >New Brand</a>
+                                        <a href="<c:url value="product/add"/>" role="button" class="btn btn-info  btn " aria-pressed="true"  >New Product</a>
                                     </div>
                                     <form:form id="headerSearchForm" action="products" modelAttribute="products" class="col-sm-3 col-md-3 col-lg-12"  method="GET">
 
@@ -46,20 +50,20 @@
                                                 </div> 
                                             </spring:bind>
 
-<!--                                            <div class="col-sm-4"> 
-
-                                                <div id="datetimepicker" class="input-append date">
-                                                    <input type="text"></input>
-                                                    <span class="add-on">
-                                                        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-                                                    </span>
-                                                </div>
-
-                                            </div>-->
+                                            <!--                                            <div class="col-sm-4"> 
+                                            
+                                                                                            <div id="datetimepicker" class="input-append date">
+                                                                                                <input type="text"></input>
+                                                                                                <span class="add-on">
+                                                                                                    <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+                                                                                                </span>
+                                                                                            </div>
+                                            
+                                                                                        </div>-->
 
 
                                             <spring:bind path="categoryId">  
-                                                <div class="col-sm-4 col-md-4 col-lg-4 pull-left"> 
+                                                <div class="col-sm-2 col-md-2 col-lg2 pull-left"> 
                                                     <form:select id="keyValue" class="btn  btn active" path="categoryId">
                                                         <c:forEach items="${categoryList}" var="cat">
                                                             <option value="${cat.catId}">${cat.name}</option>
@@ -130,8 +134,8 @@
                                                     <td class="col-sm-1">${pr.brandId.name }</td>
                                                     <td class="col-sm-2">${pr.categoryId.name }</td>
                                                     <td class="col-sm-2" align="center">
-                                                        <a href="<c:url value="editBrand/${pr.PId}"/>" class="btn btn-info"><em class="fa fa-pencil"></em></a>
-                                                        <a href="<c:url value="brand/${pr.PId}/delete"/>" class="btn btn-danger"><em class="fa fa-trash"></em></a>
+                                                        <a href="<c:url value="editproduct/${pr.PId}"/>" class="btn btn-info"><em class="fa fa-pencil"></em></a>
+                                                        <a href="<c:url value="product/${pr.PId}/delete"/>" class="btn btn-danger"><em class="fa fa-trash"></em></a>
                                                     </td>
                                                 </tr>                  
                                             </tbody>
@@ -147,23 +151,8 @@
                 </div>
             </div>
         </div>
-<!--        <script type="text/javascript"
-                src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
-        </script> 
-        <script type="text/javascript"
-                src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
-        </script>
-        <script type="text/javascript"
-                src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
-        </script>
-        <script type="text/javascript"
-                src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
-        </script>
-        <script type="text/javascript">
-            $('#datetimepicker').datetimepicker({
-                format: 'dd/MM/yyyy hh:mm:ss',
-                language: 'pt-BR'
-            });
-        </script>-->
-    </body>
+        <script src="${pageContext.request.contextPath}/resources/js/jquery-1.10.2.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js" charset="UTF-8"></script>
+ 
+</body>
 </html>

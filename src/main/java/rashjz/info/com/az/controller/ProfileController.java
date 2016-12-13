@@ -36,6 +36,7 @@ import rashjz.info.com.az.entity.Users;
 import rashjz.info.com.az.service.UserService;
 import rashjz.info.com.az.util.AuthoritiesConverter;
 import rashjz.info.com.az.util.SecurityUtil;
+import rashjz.info.com.az.util.StaticParams;
 
 /**
  *
@@ -51,7 +52,6 @@ public class ProfileController implements Serializable {
 
     @Inject
     private ConnectionRepository connectionRepository;
-    private static String UPLOAD_LOCATION = "/home/rashad/uploads/";
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String getProfilePage(Model model) {
@@ -60,21 +60,19 @@ public class ProfileController implements Serializable {
     }
 
     @RequestMapping(value = "/uploadimage", method = RequestMethod.POST)
-    public String doUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam("imagefile") MultipartFile file
-    ) {
-//        String UPLOAD_LOCATION = "D:/";
-        logger.info("--------------- " + "  file " + file.getOriginalFilename());
+    public String doUpload(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            @RequestParam("imagefile") MultipartFile file) { 
         try {
             if (file != null && !file.isEmpty()) {
                 String fileName = UUID.randomUUID().toString() + "." + getExt(file.getOriginalFilename());
-                FileCopyUtils.copy(file.getBytes(), new File(UPLOAD_LOCATION + fileName));
+                FileCopyUtils.copy(file.getBytes(), new File(StaticParams.UPLOAD_LOCATION + fileName));
                 //update userimage 
                 Users users = AuthoritiesConverter.getUserObject().getUsers();
                 //uploads -  url that will get image folder from mvc resources
                 users.setImage("/uploads/" + fileName);
-                userService.update(users);
-//                LocalUser lu = new LocalUser(users, users.getUsername(), users.getPassword(), true, true, true, true, new AuthorizationUtility().getAuthorities(users.getUserRoleses()));
-//                SecurityUtil.authenticateUser(lu);
+                userService.update(users); 
             }
         } catch (Exception e) {
             e.printStackTrace();
