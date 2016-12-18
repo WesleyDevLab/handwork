@@ -150,25 +150,30 @@
                     <div class="related-products">
                         <h3>Uyğun Məhsullar</h3> 
                         <c:forEach items="${sameCatProducts}" var="pro" varStatus="index" >
-                            <div class="col-md-4 related products-grid"> 
-                                <c:if test="${fn:length(pro.productImageCollection) gt 0}">
-                                    <c:choose>
-                                        <c:when test = "${empty  pro.productImageCollection[0].imgName}">
-                                            <img src="${pageContext.request.contextPath}/resources/images/no-image-crop.png" style="width: 250px; height: 250px;"/>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <img src="http://opal.az<c:out value="${pro.productImageCollection[0].imgName}" />" style="max-width: 200px;max-height: 200px;"
-                                                 onerror="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/no-image-crop.png';"class="img-responsive">
-                                        </c:otherwise>
-                                    </c:choose> 
+                            <div class="col-md-4 related products-grid">
+                                <a href="<c:url value="view?code=${pro.PId}"/>">
+                                    <c:if test="${fn:length(pro.productImageCollection) gt 0}">
+                                        <c:choose>
+                                            <c:when test = "${empty  pro.productImageCollection[0].imgName}">
+                                                <img src="${pageContext.request.contextPath}/resources/images/no-image-crop.png" style="width: 250px; height: 250px;"/>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img src="http://opal.az<c:out value="${pro.productImageCollection[0].imgName}" />" style="max-width: 200px;max-height: 200px;"
+                                                     onerror="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/no-image-crop.png';"class="img-responsive">
+                                            </c:otherwise>
+                                        </c:choose> 
 
-                                    <div class="simpleCart_shelfItem rel"> 
-                                        <p><span class="overline"> Qiymət ${pro.price} AZN</span> <span class="item_price val"></span></p>
-                                        <!--                                <div class="single-but item_add">
-                                                                            <input type="submit" value="add to cart">
-                                                                        </div>-->
-                                    </div>
-                                </c:if>
+                                        <div class="simpleCart_shelfItem rel"> 
+                                            <!--<p>-->
+                                                <span class="overline"> Qiymət ${pro.price} AZN</span> 
+                                                <span class="item_price val"></span>
+                                                <!--</p>-->
+                                            <!--                                <div class="single-but item_add">
+                                                                                <input type="submit" value="add to cart">
+                                                                            </div>-->
+                                        </div>
+                                    </c:if>
+                                </a>
                             </div>
                         </c:forEach> 
 

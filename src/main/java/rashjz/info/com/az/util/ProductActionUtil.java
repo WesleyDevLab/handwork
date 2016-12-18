@@ -34,7 +34,6 @@ public class ProductActionUtil {
 //            }
 //        }
 //    }
-
     public static void settingFilter(Model model, List<Integer> categories, List<Integer> brandsList, Map<String, Object> filters, String gendertype, String keyValue) {
 
         if (brandsList.size() > 0) {
@@ -46,6 +45,10 @@ public class ProductActionUtil {
         if (categories.size() > 0) {
             filters.put("categoryId", categories);
             model.addAttribute("catgs", categories.toString());
+
+            if (categories.size() == 1) {
+                model.addAttribute("menuClassActive", categories.get(0));
+            }
         }
 
         if (gendertype != null && !gendertype.equals("")) {
@@ -60,16 +63,16 @@ public class ProductActionUtil {
     }
 
     public static void convertStringtoList(List<Integer> categories, List<Integer> brandsList, String catgs, String brand) {
-        if (catgs != null && !catgs.equals("")&& !catgs.equals("[]")) {
-            LOG.info(catgs + "''''''''''''''''''''''''''catgs "+catgs+" && !catgs.equals(\"\")''''''''''''''''''''''''''");
+        if (catgs != null && !catgs.equals("") && !catgs.equals("[]")) {
+            LOG.info(catgs + "''''''''''''''''''''''''''catgs " + catgs + " && !catgs.equals(\"\")''''''''''''''''''''''''''");
             //categoryden varsa  pagination ile yoxlayanda 
             String[] resplit = catgs.toString().substring(1, catgs.toString().length() - 1).split(",");
- 
+
             for (String index : resplit) {
                 categories.add(Integer.parseInt(index));
             }
         }
-        if (brand != null && !brand.equals("")&& !brand.equals("[]")) {
+        if (brand != null && !brand.equals("") && !brand.equals("[]")) {
             //categoryden varsa  pagination ile yoxlayanda 
             String[] resplit = brand.toString().substring(1, brand.toString().length() - 1).split(",");
             for (String index : resplit) {

@@ -9,9 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
     </head>
     <body>
         <div class="mega_nav">
@@ -19,8 +17,8 @@
                 <div class="menu_sec">
                     <!-- start header menu -->
                     <ul class="megamenu skyblue">
-                        <li class="active grid">
-                            <a class="color1" href="products">Ana Menu</a>
+                        <li id="menulink0" class="grid">
+                            <a  class="color1" href="index">Ana Menu</a>
                             <div class="megapanel">
                                 <div class="row">
                                     <div class="col1">
@@ -28,7 +26,7 @@
                                             <h4>Brendlər</h4>
                                             <ul> 
                                                 <c:forEach items="${listWrapper.brandCatList}" varStatus="i" var="function"> 
-                                                    <li>
+                                                    <li >
                                                         <a  href="products?brands=[${function.id}]">${function.name}</a> 
                                                     </li>
                                                 </c:forEach>
@@ -48,20 +46,19 @@
                                                                                 </ul>	
                                                                             </div>							
                                                                         </div>-->
-                                </div>							
+                                </div>						
                             </div>
                         </li>
-                
-                        <c:forEach items="${listWrapper.categoryList}" varStatus="i" var="function"> 
-                            <li>
+
+                        <c:forEach items="${listWrapper.categoryList}" varStatus="i" var="function">
+                            <li id="menulink${function.catId}">
                                 <a class="color1" href="products?catgs=[${function.catId}]">${function.name}</a>
                             </li>
-                        </c:forEach>
-
-                    </ul> 
+                        </c:forEach> 
+                    </ul>
                     <div class="search">
                         <form action="products"   method="get">
-                            <input type="text" name="keyValue" value="" placeholder="Search...">
+                            <input type="text" name="keyValue" value="" placeholder="Axtarış...">
                             <input type="submit" value="">
                         </form>
                     </div>
@@ -69,5 +66,12 @@
                 </div>
             </div>
         </div>
+
+
+        <script>
+            //menu activate script
+            $('#menulink'+${menuClassActive}).addClass(' active');
+        </script>
+
     </body>
 </html>

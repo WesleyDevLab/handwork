@@ -141,15 +141,15 @@
                                 <div class="cart-sec simpleCart_shelfItem">
                                     <div class="cart-item cyc"> 
                                         <c:choose>
-                                                <c:when test = "${fn:length(order.productId.productImageCollection) gt 0}">
-                                                    <img src="http://opal.az<c:out value="${order.productId.productImageCollection[0].imgName}" />" 
-                                                         onerror="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/no-image-crop.png';" 
-                                                         style="max-width: 200px;max-height: 200px;" class="img-responsive" />
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <img src="${pageContext.request.contextPath}/resources/images/no-image-crop.png" style="width: 200px; height: 200px;"/>
-                                                </c:otherwise>
-                                            </c:choose>
+                                            <c:when test = "${fn:length(order.productId.productImageCollection) gt 0}">
+                                                <img src="http://opal.az<c:out value="${order.productId.productImageCollection[0].imgName}" />" 
+                                                     onerror="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/no-image-crop.png';" 
+                                                     style="max-width: 200px;max-height: 200px;" class="img-responsive" />
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img src="${pageContext.request.contextPath}/resources/images/no-image-crop.png" style="width: 200px; height: 200px;"/>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                     <div class="cart-item-info">
                                         <ul  class="qty"> 
@@ -162,14 +162,17 @@
                                             <span>Status : ${order.statusId.status}</span>
                                             <div class="clearfix"></div>
                                         </div>	
-                                        <div class="fgh">
-                                            <!--<a href="#"></a>-->
-                                            <input class="btn bg-color-red" name='submit' type='submit' value='Add To Cart' />
+                                        <div class="fgh"> 
+                                            <button type="submit"   class="btn btn-primary">
+                                                <span class="glyphicon glyphicon-credit-card"></span> Add To Cart
+                                            </button>
                                             <a data-toggle="modal" data-id="${order.productId.price}" data-backdrop="static" 
                                                data-keyboard="true" data-target="#myModal" >
                                                 <span class="glyphicon glyphicon-envelope"></span>
+                                            </a> 
+                                            <a href="<c:url value="view?code=${order.productId.PId}"/>" style="margin-left: 3px;">
+                                                <span class="glyphicon glyphicon-zoom-in"></span>
                                             </a>
-
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>

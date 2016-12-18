@@ -51,6 +51,7 @@ public class ProductController implements Serializable {
         List<ProductImage> listLast = productService.getLastProducts();
         List<ProductImage> listMost = productService.getMostProducts();
         List<SliderImage> listSilderImages = sliderImageService.getAll(SliderImage.class);
+        model.addAttribute("menuClassActive", 0);//ana menu
         model.addAttribute("content", 1);
         model.addAttribute("listLast", listLast);
         model.addAttribute("listMost", listMost);
