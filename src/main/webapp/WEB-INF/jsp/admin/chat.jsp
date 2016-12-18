@@ -20,8 +20,8 @@
     </head>
     <body data-spy="scroll" data-target=".navbar" data-offset="50">
         <div id="wrapper">
-            <jsp:include page="headerAdmin.jsp" />
-            <jsp:include page="menuAdmin.jsp" />
+            <jsp:include page="template/headerAdmin.jsp" />
+            <jsp:include page="template/menuAdmin.jsp" />
 
             <div id="page-wrapper">
                 <div id="page-inner">
@@ -66,7 +66,7 @@
                         </div> <!-- end chat-history -->
 
                     </div> <!-- end chat -->
-
+                    <jsp:include page="template/footerAdmin.jsp" />
                 </div>
             </div>
         </div>

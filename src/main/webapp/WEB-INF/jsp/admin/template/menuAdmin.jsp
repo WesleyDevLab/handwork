@@ -17,27 +17,27 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a class="active-menu" href="${pageContext.request.contextPath}/admin/users"><i class="fa fa-dashboard"></i>Users</a>
+                        <a class="active-menu" href="${pageContext.request.contextPath}/admin/users"><i class="fa fa-user"></i>Users</a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/admin/products"><i class="fa fa-desktop"></i> Product</a>
+                        <a href="${pageContext.request.contextPath}/admin/products"><i class="fa fa-edit"></i> Product</a>
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fa fa-desktop"></i> Order <span class="fa arrow"></span>
+                            <i class="fa fa-opencart"></i> Order <span class="fa cart"></span>
                         </a>
                         <ul class="nav nav-second-level active-menu">
                             <li>
-                                <a href="${pageContext.request.contextPath}/admin/checkoutList?typeId=3">Səbət</a>
+                                <a href="${pageContext.request.contextPath}/admin/checkoutList?typeId=3"><i class="fa fa-money"></i>Səbət</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/admin/checkoutList?typeId=2">Təhvil Verilən</a>
+                                <a href="${pageContext.request.contextPath}/admin/checkoutList?typeId=2"><i class="fa fa-check"></i>Təhvil Verilən</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/admin/checkoutList?typeId=1">Gözləmədə olanlar</a>
+                                <a href="${pageContext.request.contextPath}/admin/checkoutList?typeId=1"><i class="fa fa-lock"></i>Gözləmədə olanlar</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/admin/checkoutList?typeId=4">Silinən</a>
+                                <a href="${pageContext.request.contextPath}/admin/checkoutList?typeId=4"><i class="fa fa-trash"></i>Silinən</a>
                             </li>
                         </ul>
                     </li>
@@ -49,9 +49,11 @@
                     </li>
 
                     <li>
-                        <a href="${pageContext.request.contextPath}/admin/faqAdmin"><i class="fa fa-table"></i> FAQ</a>
+                        <a href="${pageContext.request.contextPath}/admin/faqAdmin"><i class="fa fa-question"></i> FAQ</a>
                     </li>
-
+                    <li>
+                        <a href="${pageContext.request.contextPath}/admin/listMassage"><i class="fa fa-envelope"></i> İsmarıc</a>
+                    </li>
                 </ul>
 
             </div>

@@ -49,23 +49,23 @@ public class CardController implements Serializable {
     private ProductService productService;
 
     @RequestMapping(value = "/checkout", method = RequestMethod.GET)
-    public String getcheckoutPage(Model model,@RequestParam(value = "typeId", required = false) Integer typeId) {
+    public String getcheckoutPage(Model model, @RequestParam(value = "typeId", required = false) Integer typeId) {
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
             return "redirect:/login";
         } else {
-            if (typeId==null) {
-                typeId=3;//standart sebet
+            if (typeId == null) {
+                typeId = 3;//standart sebet
             }
             Users entity = AuthoritiesConverter.getUserObject().getUsers();
-            List<Orders> orders = orderService.getByUserId(entity,typeId);
-            Double totalPrice = orderService.getTotalAmountByUserId(entity,typeId); 
+            List<Orders> orders = orderService.getByUserId(entity, typeId);
+            Double totalPrice = orderService.getTotalAmountByUserId(entity, typeId);
             if (orders != null) {
                 model.addAttribute("total", orders.size());
                 model.addAttribute("price", totalPrice);
             } else {
                 model.addAttribute("total", 0);
             }
-            model.addAttribute("typeId",typeId);
+            model.addAttribute("typeId", typeId);
             model.addAttribute("orders", orders);
         }
         return "checkout";
@@ -95,8 +95,8 @@ public class CardController implements Serializable {
     @RequestMapping(value = "/addtocard", method = RequestMethod.POST)
     public String getAddToCard(HttpServletRequest request, HttpServletResponse response, Model model) {
         logger.info("---------------- quantity : " + request.getParameter("quantity") + " pId " + request.getParameter("code"));
-
-        Products products = productService.getByKey(1);
+        Integer pid = Integer.parseInt(request.getParameter("code"));
+        Products products = productService.getByKey(pid);
         Orders orders = new Orders();
         orders.setUserId(AuthoritiesConverter.getUserObject().getUsers());
         orders.setInsertDate(new Date());

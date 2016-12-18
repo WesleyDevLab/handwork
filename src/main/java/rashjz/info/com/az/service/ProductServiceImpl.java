@@ -60,7 +60,7 @@ public class ProductServiceImpl implements Serializable, ProductService {
     }
 
     @Override
-    public List<Products> getLastProducts() {
+    public List<ProductImage> getLastProducts() {
         return productDao.getLastProducts();
     }
 

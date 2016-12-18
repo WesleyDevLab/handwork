@@ -19,8 +19,8 @@
 
     </head>
     <body>
-        <jsp:include page="headerAdmin.jsp" />
-        <jsp:include page="menuAdmin.jsp" />
+        <jsp:include page="template/headerAdmin.jsp" />
+        <jsp:include page="template/menuAdmin.jsp" />
         <spring:url value="/admin/editproduct" var="actionUrl"/>
         <spring:url value="/admin/products" var="action"/>
 
@@ -253,7 +253,7 @@
                                                     <input type="file"  class="filestyle"  style="margin-top: 8px;" id="imagefile" name="imagefile" multiple="multiple" accept="image/*" />
                                                 </div> 
                                                 <input type="hidden" name="${_csrf.parameterName}" 	value="${_csrf.token}" />
-                                                <input type="hidden" name="id" 	value="1" />
+                                                <input type="hidden" name="id" 	value="${product.PId}" />
                                                 <input type="submit" style="margin-top: 8px;" value="Upload" class="btn-primary btn-sm pull-left"> 
                                             </form:form>
                                         </div>
@@ -280,15 +280,14 @@
                         </div>
                     </div>
                 </div>
+                <jsp:include page="template/footerAdmin.jsp" />
             </div>
             <!-- /. PAGE INNER  -->
         </div>
-        <!-- /. WRAPPER  -->
-        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.10/moment-timezone-utils.js"></script>-->
-        <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js" charset="UTF-8"></script>
-        <script  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.js" charset="UTF-8"/>
 
-        <script>
+
+
+        <script  type="text/javascript">
             $(function () {
                 $("#datetimepicker1").datepicker({
                     format: 'dd-mm-yyyy',
@@ -298,5 +297,7 @@
                 });
             });
         </script>
+        <!-- /. WRAPPER  -->
+
     </body>
 </html>

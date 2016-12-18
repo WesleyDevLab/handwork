@@ -8,6 +8,7 @@ package rashjz.info.com.az.service;
 import java.util.List;
 import org.hibernate.Criteria;
 import rashjz.info.com.az.entity.ProductImage;
+import rashjz.info.com.az.entity.Products;
 
 /**
  *
@@ -24,6 +25,10 @@ public interface ProductImagesService {
     public void persist(ProductImage entity);
     
     public ProductImage getByKey(Integer key);
+    
+    public List<ProductImage> getProductImagesList(Products pId);
+    
+     public List<ProductImage> getImagesSlide(String statusId);
     
     public List<ProductImage> getAll(Class<ProductImage> type);
 }

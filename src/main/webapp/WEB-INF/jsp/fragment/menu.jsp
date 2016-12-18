@@ -25,13 +25,13 @@
                                 <div class="row">
                                     <div class="col1">
                                         <div class="h_nav">
-                                            <h4>Kateqoriyalar</h4>
-                                            <ul>
-                                                <c:forEach items="${listWrapper.categoryList}" varStatus="i" var="function"> 
+                                            <h4>Brendlər</h4>
+                                            <ul> 
+                                                <c:forEach items="${listWrapper.brandCatList}" varStatus="i" var="function"> 
                                                     <li>
-                                                        <a  href="products?catgs=[${function.catId}]">${function.name}</a>
+                                                        <a  href="products?brands=[${function.id}]">${function.name}</a> 
                                                     </li>
-                                                </c:forEach> 
+                                                </c:forEach>
                                             </ul>	
                                         </div>							
                                     </div>
@@ -51,9 +51,10 @@
                                 </div>							
                             </div>
                         </li>
-                        <c:forEach items="${listWrapper.brandCatList}" varStatus="i" var="function"> 
+                
+                        <c:forEach items="${listWrapper.categoryList}" varStatus="i" var="function"> 
                             <li>
-                                <a class="color1" href="products?brands=[${function.id}]">${function.name}</a>
+                                <a class="color1" href="products?catgs=[${function.catId}]">${function.name}</a>
                             </li>
                         </c:forEach>
 

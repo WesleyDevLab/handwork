@@ -15,9 +15,9 @@
     <body>
         <div id="wrapper">
 
-            <jsp:include page="headerAdmin.jsp" />
+            <jsp:include page="template/headerAdmin.jsp" />
             <!--/. NAV TOP  -->
-            <jsp:include page="menuAdmin.jsp" />
+            <jsp:include page="template/menuAdmin.jsp" />
             <!-- /. NAV SIDE  -->
             <div id="page-wrapper">
                 <div id="page-inner">
@@ -179,7 +179,7 @@
 
                     </div>
                     <!-- /. ROW  -->
-                    <jsp:include page="footerAdmin.jsp" />
+                    <jsp:include page="template/footerAdmin.jsp" />
                 </div>
 
                 <!-- /. PAGE WRAPPER  -->

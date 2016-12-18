@@ -19,9 +19,9 @@
     </head>
     <body>
         <div id="wrapper">
-            <jsp:include page="headerAdmin.jsp" />
-            <jsp:include page="menuAdmin.jsp" />
-             <spring:url value="/users" var="users" />
+            <jsp:include page="template/headerAdmin.jsp" />
+            <jsp:include page="template/menuAdmin.jsp" />
+            <spring:url value="/users" var="users" />
             <div id="page-wrapper">
                 <div id="page-inner">
                     <div class="col-md-12">  
@@ -51,8 +51,8 @@
                                                 </div> 
                                             </spring:bind> 
                                             <div class="col-sm-3 col-md-3 col-lg-3">                                     
-                                                </div> 
-                                                 
+                                            </div> 
+
                                             <div class="col-sm-3 col-md-3 col-lg-4"> 
                                                 <spring:bind path="enabled">  
                                                     <form:select id="keyValue" class="btn  btn active" path="enabled">
@@ -118,6 +118,7 @@
                             </div>
                         </div>
                     </div>
+                    <jsp:include page="template/footerAdmin.jsp" />
                 </div>
             </div>
         </div>

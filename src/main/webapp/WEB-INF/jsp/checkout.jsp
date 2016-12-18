@@ -15,7 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Opal.az - Səbət</title>
         <link rel="shortcut icon"  href="https://p.w3layouts.com/demos/pendent_store/web/images/cart1.png" type="image/png">
-        <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
+        <!--<script src="$!{pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>-->
 
         <style type="text/css">
             .list-group-item.active:hover{
@@ -139,8 +139,17 @@
                                      -o-transition: color 0.2s ease-in-out;
                                      transition: color 0.2s ease-in-out;"> </div>
                                 <div class="cart-sec simpleCart_shelfItem">
-                                    <div class="cart-item cyc">
-                                        <img src="${pageContext.request.contextPath}/resources/images/12.jpg" class="img-responsive" alt=""/>
+                                    <div class="cart-item cyc"> 
+                                        <c:choose>
+                                                <c:when test = "${fn:length(order.productId.productImageCollection) gt 0}">
+                                                    <img src="http://opal.az<c:out value="${order.productId.productImageCollection[0].imgName}" />" 
+                                                         onerror="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/no-image-crop.png';" 
+                                                         style="max-width: 200px;max-height: 200px;" class="img-responsive" />
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <img src="${pageContext.request.contextPath}/resources/images/no-image-crop.png" style="width: 200px; height: 200px;"/>
+                                                </c:otherwise>
+                                            </c:choose>
                                     </div>
                                     <div class="cart-item-info">
                                         <ul  class="qty"> 

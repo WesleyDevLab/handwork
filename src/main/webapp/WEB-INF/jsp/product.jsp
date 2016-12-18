@@ -33,15 +33,29 @@
                                 <div class="products-grd">
                                     <div class="p-one simpleCart_shelfItem prd">
                                         <a href="<c:url value="view?code=${products.PId}"/>">
-                                            <img src="${pageContext.request.contextPath}/resources/images/11.jpg" alt="" class="img-responsive" />
+                                            <c:choose>
+                                                <c:when test = "${fn:length(products.productImageCollection) gt 0}">
+                                                    <img src="http://opal.az<c:out value="${products.productImageCollection[0].imgName}" />" 
+                                                         onerror="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/no-image-crop.png';" 
+                                                         style="max-width: 200px;max-height: 200px;" class="img-responsive" />
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <img src="${pageContext.request.contextPath}/resources/images/no-image-crop.png" style="width: 200px; height: 200px;"/>
+                                                </c:otherwise>
+                                            </c:choose>
+
                                             <div class="mask">
                                                 <span>Quick View</span>
                                             </div>
                                         </a>
                                         <h4>${products.title} </h4> 
-                                        <p><a class="item_add" href="<c:url value="view?code=${products.PId}"/>"><i></i> <span class=" item_price valsa">${products.price}</span></a></p>
+                                        <p>
+                                            <a class="item_add" href="<c:url value="view?code=${products.PId}"/>">
+                                                <i></i> <span class=" item_price valsa">${products.price} AZN</span>
+                                            </a>
+                                        </p>
                                         <div class="pro-grd">
-                                            <a href="<c:url value="view?code=${products.PId}"/>">10% Off</a>
+                                            <a href="<c:url value="view?code=${products.PId}"/>">${products.price} AZN</a>
                                         </div>
                                     </div>	
                                 </div>
@@ -73,7 +87,7 @@
                         </div>
                     </div> 
                 </c:if>
-                <c:if test="${(fn:length(productList) < 1 && fn:length(productList) <3) || (fn:length(productList) > 3 && fn:length(productList) <6) || (fn:length(productList) > 6 && fn:length(productList) <9)}">   
+                <c:if test="${fn:length(productList)%3 != 0}">   
                     <div class="clearfix"></div>
                     <div>
                         <br/>

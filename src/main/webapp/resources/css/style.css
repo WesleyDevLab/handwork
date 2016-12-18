@@ -1892,6 +1892,9 @@ p span.val{
 p span.overline{
 	/*text-decoration:line-through;*/
 	color:#000;
+        font-color:#0ea4d6;
+        font-size: 12px;
+        font-weight: bold;
 }
 .related.products-grid img {
   margin: 0 auto;

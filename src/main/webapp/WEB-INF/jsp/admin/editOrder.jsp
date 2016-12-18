@@ -19,8 +19,8 @@
     <body>
         <div id="wrapper" style="height: 100%">
 
-            <jsp:include page="headerAdmin.jsp" />
-            <jsp:include page="menuAdmin.jsp" />
+            <jsp:include page="template/headerAdmin.jsp" />
+            <jsp:include page="template/menuAdmin.jsp" />
             <spring:url value="/admin/editOrder" var="actionUrl"/>
             <spring:url value="/admin/checkoutList" var="action"/>
             <div id="page-wrapper" >
@@ -55,7 +55,7 @@
                                                 <form:hidden path="id" />
                                                 <form:hidden path="productId.pId" />
                                                 <form:hidden path="userId.userId" />
-                                              
+
                                                 <spring:bind path="productId.title">
                                                     <div class=" form-group ${status.error ? 'has-error' : ''}">
 
@@ -77,7 +77,7 @@
                                                         </div>
 
                                                     </div>
-                                               </spring:bind>
+                                                </spring:bind>
                                                 <spring:bind path="userId.lastname">
                                                     <div class=" form-group ${status.error ? 'has-error' : ''}">
 
@@ -88,7 +88,7 @@
                                                         </div>
 
                                                     </div>
-                                                 </spring:bind>
+                                                </spring:bind>
                                                 <spring:bind path="count">
                                                     <div class=" form-group ${status.error ? 'has-error' : ''}">
 
@@ -100,7 +100,7 @@
 
                                                     </div>
                                                 </spring:bind>
-                                                 <spring:bind path="insertDate">
+                                                <spring:bind path="insertDate">
                                                     <div class=" form-group ${status.error ? 'has-error' : ''}">
 
                                                         <label class="control-label col-sm-2 " for="insertDate">Insert Date:</label>
@@ -141,6 +141,7 @@
                             </div>
                         </div>
                     </div>
+                    <jsp:include page="template/footerAdmin.jsp" />
                 </div>
                 <!-- /. PAGE INNER  -->
             </div>

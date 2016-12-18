@@ -59,65 +59,80 @@
             ga('send', 'pageview');
 
         </script>
-        <!-- End Google Analytics --> 
-        <script src="${pageContext.request.contextPath}/resources/js/simpleCart.min.js"></script> 
-    </head>
-    <body>
-        <div class="top_bg">
-            <div class="container">
-                <div class="header_top-sec">
-                    <div class="top_right">
-                        <ul>
-                            <li><a href="contact">Əlaqə</a></li>|
-                            <li><a href="mailto:info@example.com">info@opal.az</a></li>
-                        </ul>
-                    </div>
-                    <div class="top_left">
-                        <ul> 
-                            <li class="top_link"><a href="checkout?typeId=3">Səbət</a></li>|
-                                <sec:authorize access="!isAuthenticated()">
-                                <li class="top_link"><a href="profile">Hesabım</a></li>
-                                </sec:authorize> 
-                                <sec:authorize access="isAuthenticated()">
-                                    <sec:authentication var="imgUrlProfile" scope="request" property="principal.users.image"/>
-                                <li class="top_link">
-                                    <a style="padding-top : 1px  ! important; padding-bottom: 1px ! important;" href="<c:url value="/profile" />">
-                                        <img style="height: 30px;border: 2px solid;border-radius: 25px;" 
-                                             onerror="http://www.brentfordfc.co.uk/images/common/bg_player_profile_default_big.png"  src="${imgUrlProfile}">
-                                    </a>
-                                </li> | 
+    <div id="fb-root"></div>
 
-                                <li class="top_link"><a href="<c:url value="/logout" />">Log Out</a></li>  
-                                </sec:authorize>
+    <!-- End Google Analytics --> 
+    <script src="${pageContext.request.contextPath}/resources/js/simpleCart.min.js"></script> 
+</head>
+<body>
+
+    <script>(function (d, s, id) {
+               var js, fjs = d.getElementsByTagName(s)[0];
+               if (d.getElementById(id))
+                   return;
+               js = d.createElement(s);
+               js.id = id;
+               js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=213755122398029";
+               fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));</script>
 
 
-                        </ul> 
-                    </div>
-
-                    <div class="clearfix"> </div>
+    <div class="top_bg">
+        <div class="container">
+            <div class="header_top-sec">
+                <div class="top_right">
+                    <ul>
+                        <li><a href="contact">Əlaqə</a></li>|
+                        <li><a href="mailto:info@example.com">info@opal.az</a></li>
+                    </ul>
                 </div>
+                <div class="top_left">
+                    <ul> 
+                        <li class="top_link"><a href="checkout?typeId=3">Səbət</a></li>|
+                            <sec:authorize access="!isAuthenticated()">
+                            <li class="top_link"><a href="profile">Hesabım</a></li>
+                            </sec:authorize> 
+                            <sec:authorize access="isAuthenticated()">
+                                <sec:authentication var="imgUrlProfile" scope="request" property="principal.users.image"/>
+                            <li class="top_link">
+                                <a style="padding-top : 1px  ! important; padding-bottom: 1px ! important;" href="<c:url value="/profile" />">
+                                    <img style="height: 30px; width: 30px; border: 2px solid;border-radius: 25px;"  
+                                         onerror="this.onerror=null;this.src='http://www.brentfordfc.co.uk/images/common/bg_player_profile_default_big.png';"
+                                         src="${imgUrlProfile}">
+                                </a>
+                            </li> | 
+
+                            <li class="top_link"><a href="<c:url value="/logout" />">Log Out</a></li>  
+                            </sec:authorize>
+
+
+                    </ul> 
+                </div>
+
+                <div class="clearfix"> </div>
             </div>
         </div>
-        <!-- top-header -->
-        <!-- logo-cart -->
-        <div class="header_top">
-            <div class="container">
-                <div class="logo">
-                    <a href="${pageContext.request.contextPath}/index">Opal.az</a>			 
-                </div>
-                <div class="header_right">
-                    <!--                    <div class="cart box_1">
-                                            <a href="checkout.html">
-                                                <h3> <div class="total">
-                                                        <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</div>
-                                                    <img src="$1{pageContext.request.contextPath}/resources/images/cart1.png" alt=""/></h3>
-                                            </a>
-                                            <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
-                                            <div class="clearfix"> </div>
-                                        </div>				 -->
-                </div>
-                <div class="clearfix"></div>	
+    </div>
+    <!-- top-header -->
+    <!-- logo-cart -->
+    <div class="header_top">
+        <div class="container">
+            <div class="logo">
+                <a href="${pageContext.request.contextPath}/index">Opal.az</a>			 
             </div>
+            <div class="header_right">
+                <!--                    <div class="cart box_1">
+                                        <a href="checkout.html">
+                                            <h3> <div class="total">
+                                                    <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</div>
+                                                <img src="$1{pageContext.request.contextPath}/resources/images/cart1.png" alt=""/></h3>
+                                        </a>
+                                        <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+                                        <div class="clearfix"> </div>
+                                    </div>				 -->
+            </div>
+            <div class="clearfix"></div>	
         </div>
-    </body>
+    </div>
+</body>
 </html>

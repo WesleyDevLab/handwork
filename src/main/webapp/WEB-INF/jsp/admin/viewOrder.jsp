@@ -18,8 +18,8 @@
     </head>
     <body>
         <div id="wrapper">
-            <jsp:include page="headerAdmin.jsp" />
-            <jsp:include page="menuAdmin.jsp" />
+            <jsp:include page="template/headerAdmin.jsp" />
+            <jsp:include page="template/menuAdmin.jsp" />
             <div id="page-wrapper">
                 <div id="page-inner">
                     <div class="col-md-12">  
@@ -122,6 +122,7 @@
                             </div>
                         </div>
                     </div>
+                    <jsp:include page="template/footerAdmin.jsp" />
                 </div>
             </div>
 

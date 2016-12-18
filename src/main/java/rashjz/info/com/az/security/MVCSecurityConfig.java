@@ -83,6 +83,7 @@ public class MVCSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/resources/**", "/uploadimage", "/contact").permitAll()
                 .antMatchers("/checkout").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
                 .antMatchers("/profile").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/addtocard").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .and()
                 .formLogin().loginPage("/login").failureUrl("/login?error")

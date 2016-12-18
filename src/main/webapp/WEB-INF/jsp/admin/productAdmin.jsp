@@ -23,8 +23,8 @@
 
 
         <div id="wrapper">
-            <jsp:include page="headerAdmin.jsp" />
-            <jsp:include page="menuAdmin.jsp" />
+            <jsp:include page="template/headerAdmin.jsp" />
+            <jsp:include page="template/menuAdmin.jsp" />
             <spring:url value="/products" var="products" />
             <div id="page-wrapper">
                 <div id="page-inner">
@@ -148,11 +148,11 @@
                             </div>
                         </div>
                     </div>
+                    <jsp:include page="template/footerAdmin.jsp" />
                 </div>
+
             </div>
         </div>
-        <script src="${pageContext.request.contextPath}/resources/js/jquery-1.10.2.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js" charset="UTF-8"></script>
- 
-</body>
+
+    </body>
 </html>

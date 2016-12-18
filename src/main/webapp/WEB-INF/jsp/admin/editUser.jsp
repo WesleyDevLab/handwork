@@ -19,8 +19,8 @@
     <body>
         <div id="wrapper">
 
-            <jsp:include page="headerAdmin.jsp" />
-            <jsp:include page="menuAdmin.jsp" />
+            <jsp:include page="template/headerAdmin.jsp" />
+            <jsp:include page="template/menuAdmin.jsp" />
             <spring:url value="/admin/edituser" var="actionUrl"/>
             <spring:url value="/admin/users" var="action"/>
             <div id="page-wrapper" >
@@ -135,6 +135,7 @@
                             </div>
                         </div>
                     </div>
+                     <jsp:include page="template/footerAdmin.jsp" />
                 </div>
                 <!-- /. PAGE INNER  -->
             </div>

@@ -30,7 +30,7 @@ public interface ProductService {
 
     public Products getByKey(Integer key);
 
-    public List<Products> getLastProducts();
+    public List<ProductImage> getLastProducts();
 
     public List<ProductImage> getMostProducts();
 

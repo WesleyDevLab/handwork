@@ -23,21 +23,19 @@
                 <div class="col-md-4 footer-grid">
                     <h6>Məlumat</h6>
                     <ul>
-                        <li><a href="contact">Haqqımızda</a></li>
-<!--                        <li><a href="<!c:url value="/privacyPolicy"/>">Delivery Information</a></li>-->
+                        <li><a href="contact">Əlaqə</a></li>
                         <li><a href="<c:url value="/privacyPolicy"/>">Gizlilik Siyasəti</a></li>
                         <li><a href="<c:url value="/termsConditions"/>">Şərtlər və Qaydalar</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4 footer-grid">
-                    <h6>Hesabım</h6>
-                    <ul>
-                        <!--<li><a href="checkout">Səbət</a></li>-->
-                        <li><a href="checkout?typeId=2" id="shortlink2" data-type="2">Sifarişlər</a></li>
-                        <li><a href="checkout?typeId=3" id="shortlink3" data-type="3" >Səbət</a></li> 
+<!--                        <li><a href="checkout?typeId=2" id="shortlink2" data-type="2">Sifarişlər</a></li>
+                        <li><a href="checkout?typeId=3" id="shortlink3" data-type="3" >Səbət</a></li> -->
                     </ul>
                 </div>
                
+                <div class="col-md-4 footer-grid"> 
+                    <ul>
+                        <div class="fb-page" data-href="https://www.facebook.com/Shamyabijouterie/" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Shamyabijouterie/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Shamyabijouterie/">Opal.az</a></blockquote></div>
+                    </ul>
+                </div>
                 <div class="clearfix"></div>
             </div>
         </div>

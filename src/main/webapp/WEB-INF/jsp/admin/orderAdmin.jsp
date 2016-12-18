@@ -18,19 +18,19 @@
     </head>
     <body>
         <div id="wrapper">
-            <jsp:include page="headerAdmin.jsp" />
-            <jsp:include page="menuAdmin.jsp" />
+            <jsp:include page="template/headerAdmin.jsp" />
+            <jsp:include page="template/menuAdmin.jsp" />
             <div id="page-wrapper">
                 <div id="page-inner">
                     <div class="col-md-12">  
                         <div class="panel panel-default panel-table">  
-<!--                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col col-xs-6">
-                                        <a href="<c:url value="brand/add"/>" role="button" class="btn btn-info  btn " aria-pressed="true"  >New Brand</a>
-                                    </div>
-                                </div>
-                            </div>-->
+                            <!--                            <div class="panel-heading">
+                                                            <div class="row">
+                                                                <div class="col col-xs-6">
+                                                                    <a href="<c:url value="brand/add"/>" role="button" class="btn btn-info  btn " aria-pressed="true"  >New Brand</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>-->
                             <div class="panel-body">
                                 <c:if test="${not empty msg}">
                                     <div class="alert alert-${css} alert-dismissible" role="alert">
@@ -44,20 +44,20 @@
                                     <table class="table table-striped table-bordered table-list">
                                         <thead>
                                             <tr>
-                                                
+
                                                 <th class="hidden-xs">ID</th>
                                                 <th>Product</th>
                                                 <th>User</th>
                                                 <th>Count</th>
                                                 <th>Insert Date </th>
-                                                 <th>Status</th>
+                                                <th>Status</th>
                                                 <th><em class="fa fa-cog "></em></th>
                                             </tr> 
                                         </thead>
                                         <c:forEach items="${orders}" var="ord">
                                             <tbody>
                                                 <tr>
-                                                    
+
                                                     <td class="col-sm-1">${ord.id }</td>
                                                     <td class="col-sm-2">${ord.productId.title }</td>
                                                     <td class="col-sm-2">${ord.userId.firstname }  ${ord.userId.lastname }</td>
@@ -77,6 +77,7 @@
                             </div>
                         </div>
                     </div>
+                    <jsp:include page="template/footerAdmin.jsp" />
                 </div>
             </div>
         </div>

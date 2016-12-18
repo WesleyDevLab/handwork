@@ -21,7 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import rashjz.info.com.az.domain.PagingResult;
 import rashjz.info.com.az.entity.ProductImage;
 import rashjz.info.com.az.entity.Products;
+import rashjz.info.com.az.entity.SliderImage;
+import rashjz.info.com.az.service.ProductImagesService;
 import rashjz.info.com.az.service.ProductService;
+import rashjz.info.com.az.service.SliderImageService;
 import rashjz.info.com.az.util.ProductActionUtil;
 
 /**
@@ -35,21 +38,23 @@ public class ProductController implements Serializable {
 
     @Autowired
     private ProductService productService;
- 
- 
+
+    @Autowired
+    private SliderImageService sliderImageService;
+
+    @Autowired
+    private ProductImagesService productImagesService;
+
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String gethLoginPage(Model model) {
 
-        List<Products> listLast = productService.getLastProducts();
+        List<ProductImage> listLast = productService.getLastProducts();
         List<ProductImage> listMost = productService.getMostProducts();
-        
-        List<ProductImage> listLastImages = new ArrayList<>();
-        for (int i = 0; i < listLast.size(); i++) {
-            listLastImages.add((ProductImage)listLast.get(i).getProductImageCollection().toArray()[0]);
-        } 
+        List<SliderImage> listSilderImages = sliderImageService.getAll(SliderImage.class);
         model.addAttribute("content", 1);
-        model.addAttribute("listLast", listLastImages);
+        model.addAttribute("listLast", listLast);
         model.addAttribute("listMost", listMost);
+        model.addAttribute("listSilder", listSilderImages);
         return "index";
     }
 
@@ -58,10 +63,13 @@ public class ProductController implements Serializable {
         Products product = productService.getByKey(dataID.intValue());
         if (product != null) {
             List<Products> sameCatProducts = productService.getforcategory(product);
+            List<ProductImage> imagesList = productImagesService.getProductImagesList(product);
             model.addAttribute("sameCatProducts", sameCatProducts);
-            LOG.info("::::::::::::::: ::::::::: "+sameCatProducts);
+            LOG.info("::::::::::::::: ::::::::: " + sameCatProducts);
+
             model.addAttribute("dataCode", dataID);
             model.addAttribute("product", product);
+            model.addAttribute("images", imagesList);
         } else {
             return "products";
         }

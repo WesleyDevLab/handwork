@@ -13,14 +13,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-        <!-- jQuery Js -->
         <script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-        <!-- Bootstrap Styles-->
-        <!--<link href="$!{pageContext.request.contextPath}/resources/css/bootstrap.css" rel="stylesheet" />-->
-        <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" />   
+        <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" > 
+        <link href="${pageContext.request.contextPath}/resources/css/style_1.css" rel="stylesheet" >  
+        <link href="${pageContext.request.contextPath}/resources/css/bootstrap-theme.css" rel="stylesheet" >  
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" /> 
+        <!--<script src="{pageContext.request.contextPath}/resources/js/jquery-1.10.2.js"></script>--> 
+        <!--<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" type="text/css" />-->
         <link href="${pageContext.request.contextPath}/resources/css/custom-styles.css" rel="stylesheet" />  
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'> 
-       <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
     </head>
     <body>
         <nav class="navbar navbar-default top-navbar" role="navigation">
@@ -36,8 +37,9 @@
 
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="icon-task-l"></span>
+                            <span class="badge bg-important">6</span>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
                         <li>

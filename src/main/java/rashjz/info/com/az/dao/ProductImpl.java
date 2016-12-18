@@ -67,19 +67,27 @@ public class ProductImpl extends AbstractDao<Integer, Products> implements Seria
     }
 
     @Override
-    public List<Products> getLastProducts() {
+    public List<ProductImage> getLastProducts() {
         List<Products> listProductses = null;
+        List<ProductImage> images = new ArrayList<>();
         Session session = getSession();
         try {
 //            PagingResultImage result = new PagingResultImage();
             Criteria criteria = session.createCriteria(Products.class);
             criteria.addOrder(Order.desc("insertDate"));
             criteria.setMaxResults(5);
+ 
             listProductses = criteria.list();
+            for (Products products : listProductses) {
+                if (products.getProductImageCollection().size() > 0) {
+                   images.add((ProductImage) products.getProductImageCollection().toArray()[0]);
+                }
+              
+            } 
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
-        return listProductses;
+        return images;
     }
 
     @Override
@@ -94,7 +102,10 @@ public class ProductImpl extends AbstractDao<Integer, Products> implements Seria
             criteria.setMaxResults(5);
             listProductses = criteria.list();
             for (int i = 0; i < listProductses.size(); i++) {
-                listImage.add((ProductImage) listProductses.get(i).getProducts().getProductImageCollection().toArray()[0]);
+                Products p = listProductses.get(i).getProducts();
+                if (p.getProductImageCollection().size() > 0) {
+                    listImage.add((ProductImage) p.getProductImageCollection().toArray()[0]);
+                }
             }
         } catch (RuntimeException e) {
             e.printStackTrace();

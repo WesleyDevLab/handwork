@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import rashjz.info.com.az.dao.ProductImagesDao;
 import rashjz.info.com.az.entity.ProductImage;
+import rashjz.info.com.az.entity.Products;
 
 /**
  *
@@ -52,6 +53,16 @@ public class ProductImagesServiceImpl implements ProductImagesService{
     @Override
     public List<ProductImage> getAll(Class<ProductImage> type) {
        return productImagesDao.getAll(type);
+    }
+
+    @Override
+    public List<ProductImage> getProductImagesList(Products pId) {
+        return productImagesDao.getProductImagesList(pId);
+    }
+
+    @Override
+    public List<ProductImage> getImagesSlide(String statusId) {
+        return productImagesDao.getImagesSlide(statusId);
     }
     
     

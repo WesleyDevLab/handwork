@@ -19,12 +19,12 @@
     <body>
         <div id="wrapper" style="height: 100%">
 
-            <jsp:include page="headerAdmin.jsp" />
-            <jsp:include page="menuAdmin.jsp" />
+            <jsp:include page="template/headerAdmin.jsp" />
+            <jsp:include page="template/menuAdmin.jsp" />
             <spring:url value="/admin/editFaq" var="actionUrl"/>
             <spring:url value="/admin/checkoutList" var="action"/>
             <div id="page-wrapper" >
-                <div id="page-inner" >    
+                <div id="page-inner" >
                     <div class="row" >
                         <div class="col-md-12" >
                             <div class="panel panel-default col-md-12">
@@ -120,6 +120,7 @@
                             </div>
                         </div>
                     </div>
+                     <jsp:include page="template/footerAdmin.jsp" />
                 </div>
                 <!-- /. PAGE INNER  -->
             </div>

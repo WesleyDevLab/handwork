@@ -32,7 +32,7 @@ public interface ProductDao {
 
     public List<Products> getAll(Class<Products> type);
 
-    public List<Products> getLastProducts();
+    public List<ProductImage> getLastProducts();
 
     public List<ProductImage> getMostProducts();
 

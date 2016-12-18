@@ -25,25 +25,35 @@
             </ol>
 
             <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-                <div class="item active">
-                    <img src="${pageContext.request.contextPath}/resources/images/slide/1.jpg" style="width: 100%; height: 400px;">
-                    <div class="carousel-caption">
-                        <h3>Yeni Kolleksiyalar</h3>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="${pageContext.request.contextPath}/resources/images/slide/2.jpg" style="width: 100%; height: 400px;">
-                    <div class="carousel-caption">
-                        <h3>Sifarişlə yığılma</h3>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="${pageContext.request.contextPath}/resources/images/slide/3.jpg" style="width: 100%; height: 400px;">
-                    <div class="carousel-caption">
-                        <h3>Yerində çatdırılma</h3>
-                    </div>
-                </div>
+            <div class="carousel-inner">  
+                <c:forEach items="${listSilder}"  var="silder"> 
+                    <c:choose>
+                        <c:when test = "${silder.status eq 2}">
+                            <div class="item active">
+                                <img src="${silder.imageName}" style="width: 100%; height: 400px;"/>
+                                <div class="carousel-caption">
+                                    <h3>Yeni Kolleksiyalar</h3>
+                                </div>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="item">
+                                <c:choose>
+                                    <c:when test = "${silder.imageName eq ''}">
+                                        <img src="${pageContext.request.contextPath}/resources/images/no-image-crop.png" style="width: 100%; height: 400px;"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="${silder.imageName}" style="width: 100%; height: 400px;"/>
+                                    </c:otherwise>
+                                </c:choose> 
+                                <div class="carousel-caption">
+                                    <!--<h3>Yeni Kolleksiyalar</h3>-->
+                                </div>
+                            </div>
+                        </c:otherwise>
+                    </c:choose> 
+                </c:forEach>
+
             </div>
 
             <!-- Controls -->
@@ -68,8 +78,18 @@
                         <c:forEach items="${listLast}" var="last"  >
                             <li>
                                 <div class="sliderfig-grid">
-                                    <a href="<c:url value="view?code=${last.productId.PId}"/>">
-                                        <img src="${pageContext.servletContext.contextPath}${last.imgName}" alt=" " class="img-responsive" />
+                                    <a href="<c:url value="view?code=${last.productId.PId}"/>"> 
+                                        <c:choose>
+                                            <c:when test="${last.imgName == null}">
+                                                <img  style="max-width: 200px;max-height: 200px;" 
+                                                      src="${pageContext.request.contextPath}/resources/images/no-image-crop.png"  class="img-responsive" />
+                                            </c:when> 
+                                            <c:otherwise>
+                                                <img style="max-width: 200px;max-height: 200px;" 
+                                                     src="http://opal.az${last.imgName}" class="img-responsive" 
+                                                     onerror="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/no-image-crop.png';" />
+                                            </c:otherwise>
+                                        </c:choose>
                                     </a>
                                 </div>
                             </li>
@@ -94,8 +114,18 @@
                         <c:forEach items="${listMost}" var="best"  >
                             <li>
                                 <div class="sliderfig-grid">
-                                    <a href="<c:url value="view?code=${last.productId.PId}"/>"> 
-                                        <img src="${pageContext.servletContext.contextPath}${best.imgName}" alt=" " class="img-responsive" />
+                                    <a href="<c:url value="view?code=${best.productId.PId}"/>"> 
+                                        <c:choose>
+                                            <c:when test="${best.imgName == null}">
+                                                <img style="max-width: 200px;max-height: 200px;" 
+                                                     src="${pageContext.request.contextPath}/resources/images/no-image-crop.png"  class="img-responsive" />
+                                            </c:when> 
+                                            <c:otherwise>
+                                                <img style="max-width: 200px;max-height: 200px;"   class="img-responsive"
+                                                     src="http://opal.az${best.imgName}" 
+                                                     onerror="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/no-image-crop.png';" />
+                                            </c:otherwise>
+                                        </c:choose> 
                                     </a>
                                 </div>
                             </li>
