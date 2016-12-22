@@ -15,8 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Opal.az - Səbət</title>
         <link rel="shortcut icon"  href="https://p.w3layouts.com/demos/pendent_store/web/images/cart1.png" type="image/png">
-        <!--<script src="$!{pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>-->
-
+        <meta name="google-site-verification" content="Kzwt8fKZ6Vj0r-dF_z4qlsFS7AHU5ns936Jb5KBMY48" />
         <style type="text/css">
             .list-group-item.active:hover{
                 background-color: #f65a5b  !important;
@@ -37,7 +36,7 @@
 
 
 
-        <script src="https://www.2checkout.com/static/checkout/javascript/direct.min.js"></script>
+        <!--<script src="https://www.2checkout.com/static/checkout/javascript/direct.min.js"></script>-->
         <div class="container">
             <div class="check">	 
                 <div class="col-md-3 cart-total">
@@ -71,22 +70,30 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="col-md-9 cart-items">
-                    <form action='https://sandbox.2checkout.com/checkout/purchase' method='post'>
-                        <input type='hidden' name='sid' value='901248156' />
-                        <input type='hidden' name='mode' value='2CO' />
-                        <input type='hidden' name='li_0_type' value='product' />
-                        <input type='hidden' name='li_0_name' value='invoice123' />
-                        <input type='hidden' name='li_0_price' value='1.99' />
-                        <input type='hidden' name='card_holder_name' value='Checkout Shopper' />
-                        <input type='hidden' name='street_address' value='123 Test Address' />
-                        <input type='hidden' name='street_address2' value='Suite 200' />
-                        <input type='hidden' name='city' value='Baku' />
-                        <input type='hidden' name='state' value='OH' />
-                        <input type='hidden' name='zip' value='1009' />
-                        <input type='hidden' name='country' value='AZ' />
-                        <input type='hidden' name='email' value='test@2co.com' />
-                        <input type='hidden' name='phone' value='103104112' />
-                        <!--<input type='hidden' name='currency_code' value='AZN' />-->
+                    <form action='https://2checkout.com/checkout/purchase' method='post'>
+                        <input type='hidden' name='sid' value='1303908' >
+                        <input type='hidden' name='mode' value='2CO' >
+                        <input type='hidden' name='li_0_type' value='product' >
+                        <input type='hidden' name='li_0_name' value='Example Product Name' >
+                        <input type='hidden' name='li_0_product_id' value='Example Product ID' >
+                        <input type='hidden' name='li_0__description' value='Example Product Description' >
+                        <input type='hidden' name='li_0_price' value='1.00' >
+                        <input type='hidden' name='li_0_quantity' value='2' >
+                        <input type='hidden' name='li_0_tangible' value='N' >
+                        <input type='hidden' name='card_holder_name' value='Checkout Shopper' >
+                        <input type='hidden' name='street_address' value='123 Test St' >
+                        <input type='hidden' name='street_address2' value='Suite 200' >
+                        <input type='hidden' name='city' value='Baku' >
+                        <input type='hidden' name='state' value='Baku' >
+                        <input type='hidden' name='zip' value='43228' >
+                        <input type='hidden' name='country' value='AZ' >
+                        <input type='hidden' name='currency_code' value='AZN' >
+                        <input type='hidden' name='email' value='test@2co.com' >
+                        <input type='hidden' name='phone' value='103118881' >
+                        <input type='hidden' name='phone_extension' value='197' >
+                        <input type='hidden' name='purchase_step' value='payment-method' >
+                        <!--<input name='submit' type='submit' value='Checkout' >-->
+                        <!--</form>-->
 
                         <!--<h1>Səbətim $!{total}</h1>-->
                         <c:forEach items="${orders}" varStatus="i" var="order">

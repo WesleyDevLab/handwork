@@ -14,6 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Opal.az - Əl İşləri</title>
+        <meta name="google-site-verification" content="Kzwt8fKZ6Vj0r-dF_z4qlsFS7AHU5ns936Jb5KBMY48" />
         <link rel="shortcut icon"  href="https://p.w3layouts.com/demos/pendent_store/web/images/cart1.png" type="image/png">
     </head>
     <body>
@@ -28,9 +29,10 @@
                     <div class="col-md-6 log">
                         <h3>Login</h3>
                         <div class="strip"></div>
-                        <p>Salam, davam etmək üçün aşağıdakı daxil edin.</p>
-                        <p>If you have previously Login with us, <a href="#">Click Here</a></p>
+<!--                        <p>Salam, davam etmək üçün aşağıdakı daxil edin.</p>
+                        <p>If you have previously Login with us, <a href="#">Click Here</a></p>-->
                         <spring:url var="loginUrl" value="/login" />
+                      
                         <form id="loginform" action="${loginUrl}" method="post"  role="form">
                             <input type="hidden" name="${_csrf.parameterName}" 	value="${_csrf.token}" />
                             <c:if test="${param.error != null}">

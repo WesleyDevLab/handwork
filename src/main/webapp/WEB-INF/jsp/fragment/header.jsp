@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
             function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -83,7 +84,7 @@
                 <div class="top_right">
                     <ul>
                         <li><a href="contact">Əlaqə</a></li>|
-                        <li><a href="mailto:info@example.com">info@opal.az</a></li>
+                        <li><a href="faq">Sual - Cavab</a></li>
                     </ul>
                 </div>
                 <div class="top_left">

@@ -5,11 +5,15 @@
  */
 package rashjz.info.com.az.controller;
 
+//import com.twocheckout.Twocheckout;
+//import com.twocheckout.TwocheckoutCharge;
+//import com.twocheckout.model.Authorization;
 import java.io.File;
 import java.io.Serializable;
 import java.security.Principal;
 import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Logger;
@@ -59,11 +63,49 @@ public class ProfileController implements Serializable {
         return "profile";
     }
 
+//    @RequestMapping(value = "/test2c", method = RequestMethod.POST)
+//    public String test2c(Model model) {
+////        F9E37ED9-86D9-4139-BFE2-6EABD521C13E
+//        Twocheckout.privatekey = "4C7B5B7A-E434-4B5F-AF21-B0774283DBDB";
+//        Twocheckout.mode = "sandbox";
+//
+//        logger.info("====================   start");
+//        try {
+//            HashMap<String, String> billing = new HashMap<String, String>();
+//            billing.put("name", "Testing Tester");
+//            billing.put("addrLine1", "xvxcvxcvxcvcx");
+//            billing.put("city", "Columbus");
+//            billing.put("state", "Ohio");
+//            billing.put("country", "USA");
+//            billing.put("zipCode", "43230");
+//            billing.put("email", "tester@2co.com");
+//            billing.put("phone", "555-555-5555");
+//
+//            HashMap<String, Object> request = new HashMap<String, Object>();
+//            request.put("sellerId", "103118881");
+//            request.put("merchantOrderId", "test123");
+////            
+//            request.put("token", "NTlkYmJhZWEtNTI4MS00ZTBjLTlmNDgtMzdlNTdmODNhNzM1");
+////            request.put("token", "MGI4OTU0OTQtMDIxNi00YThlLTliOTctZjg1YmJiMzg0MjA3");
+//            request.put("currency", "USD");
+//            request.put("total", "1.00");
+//            request.put("billingAddr", billing);
+//
+//            Authorization response = TwocheckoutCharge.authorize(request);
+//            String message = response.getResponseMsg();
+//            logger.info("====================   " + message);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            String message = e.toString();
+//        }
+//        return "login";
+//    }
+
     @RequestMapping(value = "/uploadimage", method = RequestMethod.POST)
     public String doUpload(
             HttpServletRequest request,
             HttpServletResponse response,
-            @RequestParam("imagefile") MultipartFile file) { 
+            @RequestParam("imagefile") MultipartFile file) {
         try {
             if (file != null && !file.isEmpty()) {
                 String fileName = UUID.randomUUID().toString() + "." + getExt(file.getOriginalFilename());
@@ -72,7 +114,7 @@ public class ProfileController implements Serializable {
                 Users users = AuthoritiesConverter.getUserObject().getUsers();
                 //uploads -  url that will get image folder from mvc resources
                 users.setImage("/uploads/" + fileName);
-                userService.update(users); 
+                userService.update(users);
             }
         } catch (Exception e) {
             e.printStackTrace();
