@@ -14,23 +14,68 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Opal.az - Admin</title>
-        <link rel="shortcut icon"  href="https://p.w3layouts.com/demos/pendent_store/web/images/cart1.png" type="image/png">
+        <link rel="shortcut icon"  href="${pageContext.request.contextPath}/resources/images/logo.png" type="image/png">
     </head>
     <body>
         <div id="wrapper">
             <jsp:include page="template/headerAdmin.jsp" />
             <jsp:include page="template/menuAdmin.jsp" />
+                 <spring:url value="/checkoutList" var="orderadmin" />
             <div id="page-wrapper">
                 <div id="page-inner">
                     <div class="col-md-12">  
                         <div class="panel panel-default panel-table">  
-                            <!--                            <div class="panel-heading">
-                                                            <div class="row">
-                                                                <div class="col col-xs-6">
-                                                                    <a href="<c:url value="brand/add"/>" role="button" class="btn btn-info  btn " aria-pressed="true"  >New Brand</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>-->
+                       <div class="panel-heading ">
+                                <div class="row ">
+                                    <form:form id="headerSearchForm" action="checkoutList" modelAttribute="order" class="col-sm-3 col-md-3 col-lg-12"  method="GET">
+                                        <div class="navbar-btn navbar-btn">
+                                               <form:hidden path="statusId.id" />
+                                            <spring:bind path="userId.username">   
+                                                <div class="col-sm-4 col-md-4 col-lg-4"> 
+                                                    <form:input path="userId.username" type="text" class="form-control" id="userId.username" placeholder="Username"/>
+                                                </div> 
+                                            </spring:bind> 
+                                            
+                                            <spring:bind path="productId.title">  
+                                                <div class="col-sm-4 col-md-4 col-lg-4"> 
+                                                    <form:input path="productId.title" type="text" class="form-control" id="productId.title" placeholder="Enter Product"/>
+                                                </div> 
+                                            </spring:bind> 
+                                            <spring:bind path="count">  
+                                                <div class="col-sm-4 col-md-4 col-lg-4"> 
+                                                    <form:input path="count" type="text" class="form-control" id="count" placeholder="Enter Count"/>
+                                                </div> 
+                                            </spring:bind> 
+                                             <spring:bind path="toDate">
+                                                <div class="col-sm-4 col-md-4 col-lg-4"> 
+                                                    <div  class="input-group date" id="datetimepicker1"> 
+                                                        <form:input path="toDate" type="text" class="form-control" id="toDate"  />
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </spring:bind>
+                                            <spring:bind path="fromDate">
+                                                <div class="col-sm-4 col-md-4 col-lg-4 "> 
+                                                    <div  class="input-group date" id="datetimepicker2"> 
+                                                        <form:input path="fromDate" type="text" class="form-control" id="fromDate"  />
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </spring:bind> 
+                                            
+                                            <div class="col-sm-4 col-md-4 col-lg-4 pull-right"> 
+
+                                                <button type="submit"  class="btn btn-primary pull-right">Search</button>
+                                            </div>
+
+                                        </div>
+                                    </form:form>
+                                </div>
+                            </div>
                             <div class="panel-body">
                                 <c:if test="${not empty msg}">
                                     <div class="alert alert-${css} alert-dismissible" role="alert">
@@ -54,7 +99,7 @@
                                                 <th><em class="fa fa-cog "></em></th>
                                             </tr> 
                                         </thead>
-                                        <c:forEach items="${orders}" var="ord">
+                                        <c:forEach items="${orderList}" var="ord">
                                             <tbody>
                                                 <tr>
 
@@ -75,11 +120,30 @@
                                     </table>
                                 </div>
                             </div>
+                            <div style="margin-left: 10px;margin-top: 10px;" class="panel"> 
+                                <tag:paginate max="15" offset="${offset}"  count="${count}" uri="checkoutList"  keyValue="${keyValue}" next="&raquo;" previous="&laquo;" />
+                            </div>
                         </div>
                     </div>
                     <jsp:include page="template/footerAdmin.jsp" />
                 </div>
             </div>
         </div>
+         <script  type="text/javascript">
+            $(function () {
+                $("#datetimepicker1").datepicker({
+                    format: 'yyyy-mm-dd',
+                    autoclose: true,
+                    todayBtn: false,
+                    startDate: "01/01/2016"
+                });
+                $("#datetimepicker2").datepicker({
+                    format: 'yyyy-mm-dd',
+                    autoclose: true,
+                    todayBtn: false,
+                    startDate: "01/01/2016"
+                });
+            });
+        </script>        
     </body>
 </html>

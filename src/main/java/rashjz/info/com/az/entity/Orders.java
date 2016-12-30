@@ -20,6 +20,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -57,6 +58,12 @@ public class Orders implements Serializable {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     @ManyToOne
     private OrderStatus statusId;
+    
+    @Transient
+    private Date toDate;
+    
+    @Transient
+    private Date fromDate;
 
     public Orders() {
     }
@@ -118,6 +125,23 @@ public class Orders implements Serializable {
         this.statusId = statusId;
     }
 
+    public Date getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(Date toDate) {
+        this.toDate = toDate;
+    }
+
+    public Date getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(Date fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;

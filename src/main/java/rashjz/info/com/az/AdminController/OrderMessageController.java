@@ -14,12 +14,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import rashjz.info.com.az.controller.CardController;
+import rashjz.info.com.az.entity.Gender;
 import rashjz.info.com.az.entity.OrderMessage;
 import rashjz.info.com.az.entity.Products;
 import rashjz.info.com.az.entity.Users;
@@ -39,16 +41,23 @@ public class OrderMessageController implements Serializable {
     @Autowired
     OrderMessageService orderMessageService;
 
+    
+    
     @RequestMapping(value = "/listMassage", method = RequestMethod.GET)
     public String messageList(Model model) {
 
         List<OrderMessage> messageList = orderMessageService.getAll(OrderMessage.class);
         List<OrderMessage> unreadMessageList = orderMessageService.getMessageList("1");
-
+//        long listMessage = orderMessageService.getMessageListCount("1");
+//        List<OrderMessage> newMessageList = orderMessageService.getMessageList("1");
+//        System.out.println("------------------ 9999999999999999 "+newMessageList);
+//         model.addAttribute("messageListCount", listMessage);
+//         model.addAttribute("newMessageList", newMessageList);
         model.addAttribute("messageList", messageList);
         model.addAttribute("unreadMessageList", unreadMessageList);
         return "admin/orderMessage";
     }
+    
 
     @RequestMapping(value = "/userListMassage/{userId}/{pId}", method = RequestMethod.GET)
     public String UserMessageList(

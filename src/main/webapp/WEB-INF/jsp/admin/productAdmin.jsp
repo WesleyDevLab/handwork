@@ -14,7 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Opal.az - Admin</title>
-        <link rel="shortcut icon"  href="https://p.w3layouts.com/demos/pendent_store/web/images/cart1.png" type="image/png">
+        <link rel="shortcut icon"  href="${pageContext.request.contextPath}/resources/images/logo.png" type="image/png">
     </head>
     <body>
 
@@ -25,7 +25,7 @@
         <div id="wrapper">
             <jsp:include page="template/headerAdmin.jsp" />
             <jsp:include page="template/menuAdmin.jsp" />
-            <spring:url value="/products" var="products" />
+            <spring:url value="/productsadmin" var="productsadmin" />
             <div id="page-wrapper">
                 <div id="page-inner">
                     <div class="col-md-12">  
@@ -35,61 +35,77 @@
                                     <div class="col-md-2 pull-right">
                                         <a href="<c:url value="product/add"/>" role="button" class="btn btn-info  btn " aria-pressed="true"  >New Product</a>
                                     </div>
-                                    <form:form id="headerSearchForm" action="products" modelAttribute="products" class="col-sm-3 col-md-3 col-lg-12"  method="GET">
+                                    <form:form id="headerSearchForm" action="productsadmin" modelAttribute="productsadmin" class="col-sm-3 col-md-3 col-lg-12"  method="GET">
 
                                         <div class="navbar-btn navbar-btn">
-
+ 
                                             <spring:bind path="title">   
-                                                <div class="col-sm-2 col-md-2 col-lg-2"> 
+                                                <div class="col-sm-3 col-md-3 col-lg-3"> 
                                                     <form:input path="title" type="text" class="form-control" id="title" placeholder="Enter Title"/>
                                                 </div> 
                                             </spring:bind>
                                             <spring:bind path="price">   
-                                                <div class="col-sm-2 col-md-2 col-lg-2"> 
+                                                <div class="col-sm-3 col-md-3 col-lg-3"> 
                                                     <form:input path="price" type="text" class="form-control" id="price" placeholder="Enter Price"/>
                                                 </div> 
                                             </spring:bind>
-
-                                            <!--                                            <div class="col-sm-4"> 
-                                            
-                                                                                            <div id="datetimepicker" class="input-append date">
-                                                                                                <input type="text"></input>
-                                                                                                <span class="add-on">
-                                                                                                    <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-                                                                                                </span>
-                                                                                            </div>
-                                            
-                                                                                        </div>-->
-
-
-                                            <spring:bind path="categoryId">  
-                                                <div class="col-sm-2 col-md-2 col-lg2 pull-left"> 
-                                                    <form:select id="keyValue" class="btn  btn active" path="categoryId">
+                                            <spring:bind path="toDate">
+                                                <div class="col-sm-3 col-md-3 col-lg-3 "> 
+                                                    <div  class="input-group date" id="datetimepicker1"> 
+                                                        <form:input path="toDate" type="text" class="form-control" id="toDate"  />
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </spring:bind>
+                                            <spring:bind path="fromDate">
+                                                <div class="col-sm-3 col-md-3 col-lg-3 "> 
+                                                    <div  class="input-group date" id="datetimepicker2"> 
+                                                        <form:input path="fromDate" type="text" class="form-control" id="fromDate"  />
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </spring:bind>
+                                            <spring:bind path="categoryId.catId">  
+                                                <div class="col-sm-3 col-md-3 col-lg-3 "> 
+                                                    
+                                                    <form:select id="keyValue" class="btn  btn active" path="categoryId.catId">
+                                                        <option value=0>Category</option>
                                                         <c:forEach items="${categoryList}" var="cat">
                                                             <option value="${cat.catId}">${cat.name}</option>
                                                         </c:forEach>
                                                     </form:select>
+                                                            </div>
                                                 </div>
                                             </spring:bind> 
-                                            <spring:bind path="genderId"> 
-                                                <div class="col-sm-2 col-md-2 col-lg-2 pull-left"> 
-                                                    <form:select id="keyValue" class="btn  btn active" path="genderId">
+
+                                            <spring:bind path="genderId.genderId"> 
+                                                <div class="col-sm-3 col-md-3 col-lg-3 "> 
+                                                    <form:select id="keyValue" class="btn  btn active" path="genderId.genderId">
+                                                        <option value=0>Gender</option>
                                                         <c:forEach items="${genderList}" var="gn">
                                                             <option value="${gn.genderId}">${gn.type}</option>
                                                         </c:forEach>
                                                     </form:select>
                                                 </div>
                                             </spring:bind> 
-                                            <spring:bind path="brandId">  
-                                                <div class="col-sm-2 col-md-2 col-lg-2 pull-left"> 
-                                                    <form:select id="keyValue" class="btn  btn active" path="brandId">
+                                            <spring:bind path="brandId.id">  
+                                                <div class="col-sm-3 col-md-3 col-lg-3"> 
+                                                    <form:select id="keyValue" class="btn  btn active" path="brandId.id">
+                                                        <option value="0">Brand</option>
                                                         <c:forEach items="${brandList}" var="br">
                                                             <option value="${br.id}">${br.name}</option>
                                                         </c:forEach>
                                                     </form:select>
                                                 </div>
                                             </spring:bind> 
-                                            <div class="col-sm-2 col-md-2 col-lg-2 "> 
+
+
+
+                                            <div class="col-sm-3 col-md-3 col-lg-3 "> 
                                                 <button type="submit"  class="btn btn-primary">Search</button>
                                             </div>
 
@@ -144,7 +160,7 @@
                                 </div>
                             </div>
                             <div style="margin-left: 10px;margin-top: 10px;" class="panel"> 
-                                <tag:paginate max="15" offset="${offset}"  count="${count}" uri="products"  keyValue="${keyValue}" next="&raquo;" previous="&laquo;" />
+                                <tag:paginate max="15" offset="${offset}"  count="${count}" uri="productsadmin"  keyValue="${keyValue}" next="&raquo;" previous="&laquo;" />
                             </div>
                         </div>
                     </div>
@@ -153,6 +169,21 @@
 
             </div>
         </div>
-
+        <script  type="text/javascript">
+            $(function () {
+                $("#datetimepicker1").datepicker({
+                    format: 'yyyy-mm-dd',
+                    autoclose: true,
+                    todayBtn: false,
+                    startDate: "01/01/2016"
+                });
+                $("#datetimepicker2").datepicker({
+                    format: 'yyyy-mm-dd',
+                    autoclose: true,
+                    todayBtn: false,
+                    startDate: "01/01/2016"
+                });
+            });
+        </script>
     </body>
 </html>

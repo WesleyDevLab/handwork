@@ -13,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Opal.az - ${product.title}</title>
         <meta name="google-site-verification" content="Kzwt8fKZ6Vj0r-dF_z4qlsFS7AHU5ns936Jb5KBMY48" />
-        <link rel="shortcut icon"  href="https://p.w3layouts.com/demos/pendent_store/web/images/cart1.png" type="image/png">
+        <link rel="shortcut icon"  href="${pageContext.request.contextPath}/resources/images/logo.png" type="image/png">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <link href="${pageContext.request.contextPath}/resources/css/social-share-kit.css" rel="stylesheet" /> 
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/flexslider_1.css" type="text/css"  media="screen" />

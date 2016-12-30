@@ -81,12 +81,12 @@ public class ProductServiceImpl implements Serializable, ProductService {
 
     @Override
     public PagingResult lazyLoadProductsAdmin(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
-        return productDao.lazyLoadProducts(first, pageSize, sortField, sortOrder, filters);
+        return productDao.lazyLoadProductsAdmin(first, pageSize, sortField, sortOrder, filters);
     }
 
     @Override
     public Number lazyLoadProductsCountAdmin(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters, PagingResult pagingResult) {
-        return productDao.lazyLoadProductsCount(first, pageSize, sortField, sortOrder, filters, pagingResult);
+        return productDao.lazyLoadProductsCountAdmin(first, pageSize, sortField, sortOrder, filters, pagingResult);
     }
 
     @Override

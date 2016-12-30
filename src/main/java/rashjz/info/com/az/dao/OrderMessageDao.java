@@ -29,6 +29,8 @@ public interface OrderMessageDao {
     
     public List<OrderMessage> getMessageList(String statusId);
     
+     public Long getMessageListCount(String statusId);
+    
     public List<OrderMessage> getAllList(int userId);
 
 }

@@ -119,7 +119,9 @@
     <div class="header_top">
         <div class="container">
             <div class="logo">
-                <a href="${pageContext.request.contextPath}/index">Opal.az</a>			 
+                <a href="${pageContext.request.contextPath}/index">
+                    <img style="max-height:35% ;max-width: 35%" src="${pageContext.request.contextPath}/resources/images/logo.png">
+                </a>			 
             </div>
             <div class="header_right">
                 <!--                    <div class="cart box_1">

@@ -15,6 +15,7 @@ import javax.swing.SortOrder;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
@@ -206,27 +207,34 @@ public class ProductImpl extends AbstractDao<Integer, Products> implements Seria
         Transaction trns = null;
         Session session = getSession();
         try {
-            Criteria crit = session.createCriteria(Products.class);
+            Criteria crit = session.createCriteria(Products.class , "p");
             if (filters != null && !filters.isEmpty()) {
                 Iterator<Map.Entry<String, Object>> iterator = filters.entrySet().iterator();
                 while (iterator.hasNext()) {
+                    
                     Map.Entry<String, Object> entry = iterator.next();
                     LOG.info("getKey " + entry.getKey() + " Value " + entry.getValue());
                     if (entry.getKey().equals("title")) {
                         crit.add(Restrictions.like(entry.getKey(), entry.getValue().toString(), MatchMode.ANYWHERE));
-                    } else if (entry.getKey().equals("price")) {
+                    } else if (entry.getKey().equals("price")) { 
                         crit.add(Restrictions.eq(entry.getKey(), entry.getValue()));
-                    } else if (entry.getKey().equals("categoryId")) {
-                        crit.add(Restrictions.eq(entry.getKey(), entry.getValue()));
-                    } else if (entry.getKey().equals("genderId")) {
-                        crit.add(Restrictions.eq(entry.getKey(), entry.getValue()));
+                    }  
+                    else if (entry.getKey().equals("toDate")) { 
+                        crit.add(Expression.ge("insertDate", entry.getValue()));           
+                    }else if (entry.getKey().equals("fromDate")) { 
+                        crit.add(Expression.le("insertDate", entry.getValue())); 
+                    } 
+                    else if (entry.getKey().equals("categoryId")) {
+                        crit.createCriteria("p.categoryId", "categoryId", JoinType.INNER_JOIN, Restrictions.eq("catId", entry.getValue()));
+                    } 
+                    else if (entry.getKey().equals("genderId")) {
+                         crit.createCriteria("p.genderId", "genderId", JoinType.INNER_JOIN, Restrictions.eq("genderId",entry.getValue()));
                     } else if (entry.getKey().equals("brandId")) {
-                        crit.add(Restrictions.eq(entry.getKey(), entry.getValue()));
+                         crit.createCriteria("p.brandId", "brandId", JoinType.INNER_JOIN, Restrictions.eq("id",entry.getValue()));
                     }
                 }
             }
             crit = crit.setFirstResult(first).setMaxResults(pageSize);
-            System.out.println("9999999999 " + crit.list().size());
             result.setList(crit.list());
             return result;
         } catch (Exception e) {
@@ -242,10 +250,10 @@ public class ProductImpl extends AbstractDao<Integer, Products> implements Seria
         Transaction trns = null;
         Session session = getSession();
         try {
-            Criteria crit = session.createCriteria(Products.class);
+            Criteria crit = session.createCriteria(Products.class, "p");
             crit.setProjection(Projections.rowCount());
             if (filters != null && !filters.isEmpty()) {
-
+                System.out.println("salam");
                 Iterator<Map.Entry<String, Object>> iterator = filters.entrySet().iterator();
                 while (iterator.hasNext()) {
                     Map.Entry<String, Object> entry = iterator.next();
@@ -254,12 +262,17 @@ public class ProductImpl extends AbstractDao<Integer, Products> implements Seria
                         crit.add(Restrictions.like(entry.getKey(), entry.getValue().toString(), MatchMode.ANYWHERE));
                     } else if (entry.getKey().equals("price")) {
                         crit.add(Restrictions.eq(entry.getKey(), entry.getValue()));
-                    } else if (entry.getKey().equals("categoryId")) {
-                        crit.add(Restrictions.eq(entry.getKey(), entry.getValue()));
+                    } else if (entry.getKey().equals("toDate")) { 
+                        crit.add(Expression.ge("insertDate", entry.getValue()));           
+                    }else if (entry.getKey().equals("fromDate")) { 
+                        crit.add(Expression.le("insertDate", entry.getValue())); 
+                    } 
+                    else if (entry.getKey().equals("categoryId")) {
+                        crit.createCriteria("p.categoryId", "categoryId", JoinType.INNER_JOIN, Restrictions.eq("catId",entry.getValue()));
                     } else if (entry.getKey().equals("genderId")) {
-                        crit.add(Restrictions.eq(entry.getKey(), entry.getValue()));
+                        crit.createCriteria("p.genderId", "genderId", JoinType.INNER_JOIN, Restrictions.eq("genderId",entry.getValue()));
                     } else if (entry.getKey().equals("brandId")) {
-                        crit.add(Restrictions.eq(entry.getKey(), entry.getValue()));
+                        crit.createCriteria("p.brandId", "brandId", JoinType.INNER_JOIN, Restrictions.eq("id",entry.getValue()));
                     }
                 }
             }

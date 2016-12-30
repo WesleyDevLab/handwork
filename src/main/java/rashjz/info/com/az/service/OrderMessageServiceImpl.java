@@ -64,4 +64,9 @@ public class OrderMessageServiceImpl implements OrderMessageService {
         return messageDao.getAllList(userId);
     }
 
+    @Override
+    public Long getMessageListCount(String statusId) {
+       return messageDao.getMessageListCount(statusId);
+    }
+
 }

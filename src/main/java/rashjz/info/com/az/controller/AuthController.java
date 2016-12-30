@@ -7,6 +7,7 @@ package rashjz.info.com.az.controller;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -25,9 +26,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rashjz.info.com.az.domain.RegistrationForm;
+import rashjz.info.com.az.entity.Category;
 import rashjz.info.com.az.entity.Gender;
+import rashjz.info.com.az.entity.OrderMessage;
+import rashjz.info.com.az.entity.Orders;
 import rashjz.info.com.az.entity.UserRoles;
 import rashjz.info.com.az.entity.Users;
+import rashjz.info.com.az.service.OrderMessageService;
+import rashjz.info.com.az.service.OrderService;
 import rashjz.info.com.az.service.UserService;
 
 /**
@@ -44,6 +50,34 @@ public class AuthController implements Serializable {
 
     @Autowired
     MessageSource messageSource;
+    
+    @Autowired
+    OrderService orderService;
+    
+    @Autowired
+    OrderMessageService orderMessageService;
+    
+     @ModelAttribute("messageListCount")
+    public long mesaageListCount() {
+        long list = orderMessageService.getMessageListCount("1");
+        return list;
+    }
+     @ModelAttribute("newMessageList")
+    public List<OrderMessage> populateategoryList() {
+        List<OrderMessage> newMessageList = orderMessageService.getMessageList("1");
+        return newMessageList;
+    }
+     @ModelAttribute("orderCount")
+    public long orderListCount() {
+        long list = orderService.getByStatusType(5).size();
+        return list;
+    }
+     @ModelAttribute("newMessageList")
+    public List<Orders> newOrderList() {
+        List<Orders> newOrderList = orderService.getByStatusType(5);
+        return newOrderList;
+    }
+   
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getIndexPage(Model model) {

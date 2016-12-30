@@ -7,10 +7,10 @@ package rashjz.info.com.az.AdminController;
 
 import java.io.File;
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -39,16 +39,13 @@ import rashjz.info.com.az.domain.PagingResult;
 import rashjz.info.com.az.entity.Brand;
 import rashjz.info.com.az.entity.Category;
 import rashjz.info.com.az.entity.Gender;
-import rashjz.info.com.az.entity.OrderStatus;
 import rashjz.info.com.az.entity.ProductImage;
 import rashjz.info.com.az.entity.Products;
-import rashjz.info.com.az.entity.Users;
 import rashjz.info.com.az.service.BrandCategoryService;
 import rashjz.info.com.az.service.CategoryService;
 import rashjz.info.com.az.service.GenderCategoryServise;
 import rashjz.info.com.az.service.ProductImagesService;
 import rashjz.info.com.az.service.ProductService;
-import rashjz.info.com.az.util.AuthoritiesConverter;
 import rashjz.info.com.az.util.StaticParams;
 
 /**
@@ -97,46 +94,59 @@ public class ProductControllerAdmin implements Serializable {
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         //  binder.setValidator(customerFormValidator);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
-    @RequestMapping(value = "/products", method = RequestMethod.GET)
-    public String getProductsAll(Model model, @ModelAttribute("products") Products products, Integer offset, Integer maxResults) {
+    @RequestMapping(value = "/productsadmin", method = RequestMethod.GET)
+    public String getProductsAll(Model model, @ModelAttribute("productsadmin") Products products, Integer offset, Integer maxResults, BindingResult result) {
         Map<String, Object> filters = new HashMap<>();
         filters.put("", 0);
+        if (result.hasErrors()) {
+            System.out.println("xxxxx "+result.getFieldError().getDefaultMessage());
+            return "login";
+        }
         if (products == null) {
             products = new Products();
         }
         PagingResult pagingData = new PagingResult();
         if (offset == null) {
             offset = 0;
-
+            
         }
+       
         if (offset != null) {//new or old
-//            filters.put("typeId", "1");
+//            filters.put("typeId", "1");       
             if (products.getTitle() != null && !products.getTitle().equals("")) {
                 filters.put("title", products.getTitle());
             }
             if (products.getPrice() != null && !products.getPrice().equals("")) {
                 filters.put("price", products.getPrice());
             }
-            if (products.getCategoryId() != null && !products.getCategoryId().equals("")) {
-                filters.put("categoryId", products.getCategoryId());
+            
+            if (products.getCategoryId() != null && !products.getCategoryId().equals("") && products.getCategoryId().getCatId()!=0) {
+                filters.put("categoryId", products.getCategoryId().getCatId());
             }
-            if (products.getGenderId() != null && !products.getGenderId().equals("")) {
-                filters.put("genderId", products.getGenderId());
+            if (products.getGenderId() != null && !products.getGenderId().equals("") && products.getGenderId().getGenderId()!=0) {
+                filters.put("genderId", products.getGenderId().getGenderId());
             }
-            if (products.getBrandId() != null && !products.getBrandId().equals("")) {
-                filters.put("brandId", products.getBrandId());
+            if (products.getBrandId() != null && !products.getBrandId().equals("") && products.getBrandId().getId()!=0) {
+                filters.put("brandId", products.getBrandId().getId());
+            }
+            if (products.getToDate() != null && !products.getToDate().equals("") ) {
+                filters.put("toDate", products.getToDate());
+            }
+            if (products.getFromDate() != null && !products.getFromDate().equals("")) {
+                filters.put("fromDate", products.getFromDate());
             }
         }
+        
         pagingData = productService.lazyLoadProductsAdmin(offset.intValue(), 10, null, SortOrder.UNSORTED, filters);
         productService.lazyLoadProductsCountAdmin(offset.intValue(), 10, null, SortOrder.UNSORTED, filters, pagingData);
         model.addAttribute("productsList", pagingData.getList());
         model.addAttribute("count", pagingData.getTotalResult());
-        model.addAttribute("products", products);
+        model.addAttribute("productsadmin", products);
         model.addAttribute("offset", offset);
         return "admin/productAdmin";
     }
@@ -186,7 +196,7 @@ public class ProductControllerAdmin implements Serializable {
         productService.delete(products);
         redirectAttributes.addFlashAttribute("css", "success");
         redirectAttributes.addFlashAttribute("msg", "Product is deleted!");
-        return "redirect:/admin/products";
+        return "redirect:/admin/productsadmin";
 
     }
 

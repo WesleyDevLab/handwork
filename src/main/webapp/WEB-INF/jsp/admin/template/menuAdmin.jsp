@@ -20,7 +20,7 @@
                         <a class="active-menu" href="${pageContext.request.contextPath}/admin/users"><i class="fa fa-user"></i>Users</a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/admin/products"><i class="fa fa-edit"></i> Product</a>
+                        <a href="${pageContext.request.contextPath}/admin/productsadmin"><i class="fa fa-edit"></i> Product</a>
                     </li>
                     <li>
                         <a href="#">

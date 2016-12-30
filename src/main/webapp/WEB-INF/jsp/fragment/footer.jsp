@@ -25,9 +25,7 @@
                     <ul>
                         <li><a href="contact">Əlaqə</a></li>
                         <li><a href="<c:url value="/privacyPolicy"/>">Gizlilik Siyasəti</a></li>
-                        <li><a href="<c:url value="/termsConditions"/>">Şərtlər və Qaydalar</a></li>
-<!--                        <li><a href="checkout?typeId=2" id="shortlink2" data-type="2">Sifarişlər</a></li>
-                        <li><a href="checkout?typeId=3" id="shortlink3" data-type="3" >Səbət</a></li> -->
+                        <li><a href="<c:url value="/termsConditions"/>">Şərtlər və Qaydalar</a></li> 
                     </ul>
                 </div>
                

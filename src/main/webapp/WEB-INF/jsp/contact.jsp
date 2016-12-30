@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Opal.az - Əlaqə</title>
         <meta name="google-site-verification" content="Kzwt8fKZ6Vj0r-dF_z4qlsFS7AHU5ns936Jb5KBMY48" />
-        <link rel="shortcut icon"  href="https://p.w3layouts.com/demos/pendent_store/web/images/cart1.png" type="image/png">
+        <link rel="shortcut icon"  href="${pageContext.request.contextPath}/resources/images/logo.png" type="image/png">
     </head>
     <body>
         <jsp:include page="fragment/header.jsp" />
@@ -24,14 +24,16 @@
         <div class="contact">
             <div class="container">
                 <div class="col-md-4 contact-left">
-                    <h3>Ünvan</h3>
-                    <p>Bakı Şəhəri Nəsimi rayonu Nizami Küçəsi 
+                    <h3>Ünvan/Address</h3>
+                    <p>BAKU AZERBAIJAN, AZERBAIJAN 1009 <br/>
+                        Bakı Şəhəri Nəsimi rayonu Nizami Küçəsi 
+                        
                         <span>Bina 26 Mağaza 31</span></p>
                     <ul>
                         <li>Free Phone :+994702234411</li>
                         <li>Telephone :+994554961177</li>
                         <li>Fax :+994554961177</li>
-                        <li><a href="mailto:info@example.com">info@example.com</a></li>
+                        <li><a href="mailto:info@opal.az">info@opal.az</a></li>
                     </ul>
                 </div>
                 <div class="col-md-8 contact-left">

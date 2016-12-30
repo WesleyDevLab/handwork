@@ -16,7 +16,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="${pageContext.request.contextPath}/resources/css/chat.css" rel="stylesheet" />
         <title>Opal.az - Admin</title>
-        <link rel="shortcut icon"  href="https://p.w3layouts.com/demos/pendent_store/web/images/cart1.png" type="image/png">
+        <link rel="shortcut icon"  href="${pageContext.request.contextPath}/resources/images/logo.png" type="image/png">
     </head>
     <body data-spy="scroll" data-target=".navbar" data-offset="50">
         <div id="wrapper">

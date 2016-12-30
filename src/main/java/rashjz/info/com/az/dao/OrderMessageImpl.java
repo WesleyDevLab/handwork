@@ -57,6 +57,7 @@ public class OrderMessageImpl extends AbstractDao<Integer, OrderMessage> impleme
             Criteria criteria=getSession().createCriteria(OrderMessage.class);
             criteria.add(Restrictions.eq("status", statusId));
             messageList=criteria.list();
+             System.out.println("------------------------ xxxxxxxxxxxxxxxxx "+messageList.size());
             return messageList;
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,11 +73,26 @@ public class OrderMessageImpl extends AbstractDao<Integer, OrderMessage> impleme
             criteria.createCriteria("o.userId", "userId", JoinType.INNER_JOIN, Restrictions.eq("userId", userId));
             criteria.addOrder(Order.asc("insertDate"));
             messageList=criteria.list();
+           
             return messageList;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public Long getMessageListCount(String statusId) {
+        try {
+          Criteria criteria=getSession().createCriteria(OrderMessage.class);
+          criteria.add(Restrictions.eq("status", statusId));
+         int resultCount =criteria.list().size();
+          System.out.println("----------------------salam3");
+         return (long)resultCount;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       return null;
     }
 
 }

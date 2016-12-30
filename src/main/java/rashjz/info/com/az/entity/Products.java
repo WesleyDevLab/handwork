@@ -24,6 +24,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -91,7 +92,12 @@ public class Products implements Serializable {
     @JoinColumn(name = "brand_id", referencedColumnName = "id")
     @ManyToOne
     private Brand brandId;
-
+    
+    @Transient
+    private Date toDate;
+    
+    @Transient
+    private Date fromDate;
     public Products() {
     }
 
@@ -224,6 +230,25 @@ public class Products implements Serializable {
     public void setBrandId(Brand brandId) {
         this.brandId = brandId;
     }
+
+ 
+
+    public Date getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(Date toDate) {
+        this.toDate = toDate;
+    }
+
+    public Date getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(Date fromDate) {
+        this.fromDate = fromDate;
+    }
+    
 
     @Override
     public int hashCode() {
