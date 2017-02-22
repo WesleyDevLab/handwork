@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author rasha_000
+ * @author Azik
  */
 @Entity
 @Table(name = "contact_messages")

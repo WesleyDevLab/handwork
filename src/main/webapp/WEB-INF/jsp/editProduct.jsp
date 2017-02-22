@@ -1,6 +1,6 @@
 <%-- 
     Document   : editProduct
-    Created on : Dec 6, 2016, 4:13:55 PM
+    Created on : Jan 23, 2017, 4:46:01 PM
     Author     : Azik
 --%>
 
@@ -13,21 +13,23 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Opal.az - Admin</title>
+             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Opal.az - Product User</title>
         <link rel="shortcut icon"  href="${pageContext.request.contextPath}/resources/images/logo.png" type="image/png">
-      
+<!--        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" /> 
+       <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
+        <script src="${pageContext.request.contextPath}/resources/js/bootstrap-datetimepicker.js"></script>-->
 
     </head>
     <body>
-        <jsp:include page="template/headerAdmin.jsp" />
-        <jsp:include page="template/menuAdmin.jsp" />
-        <spring:url value="/admin/editproduct" var="actionUrl"/>
-        <spring:url value="/admin/products" var="action"/>
+         <jsp:include page="fragment/header.jsp" />
+        <jsp:include page="fragment/menu.jsp" />
+        <spring:url value="/editproduct" var="actionUrl"/>
+        <spring:url value="/products" var="action"/>
 
-        <div id="page-wrapper" >
+        <div id="page-wrapper " style="margin: 0 auto " >
             <div id="page-inner" >
-                <div class="row" >
+                <div class="row col-md-offset-2  "  >
                     <div class="col-md-8" >
 
                         <div class="panel panel-default col-md-12">
@@ -259,12 +261,12 @@
                         </div>
                     </div>
                 </div>
-                <jsp:include page="template/footerAdmin.jsp" />
+                     
             </div>
-            <!-- /. PAGE INNER  -->
+            
         </div>
 
-
+<jsp:include page="fragment/footer.jsp" />
 
         <script  type="text/javascript">
             $(function () {
@@ -277,6 +279,5 @@
             });
         </script>
         <!-- /. WRAPPER  -->
-
-    </body>
+ </body>
 </html>

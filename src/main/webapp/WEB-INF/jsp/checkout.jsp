@@ -41,6 +41,7 @@
             <div class="check">	 
                 <div class="col-md-3 cart-total">
                     <div style=".list-group-item.active {background-color:  red;}" class="list-group"> 
+                        <a href="checkout?typeId=1" id="shortlink1" data-type="1" class="list-group-item ">Məhsul Əlavə Et<span class="sr-only">(current)</span></a>
                         <a href="checkout?typeId=1" id="shortlink1" data-type="1" class="list-group-item ">İcrada<span class="sr-only">(current)</span></a>
                         <a href="checkout?typeId=2" id="shortlink2" data-type="2" class="list-group-item ">Çatdırılıb<span class="sr-only">(current)</span></a>
                         <a href="checkout?typeId=3" id="shortlink3" data-type="3" class="list-group-item ">Səbətdə<span class="sr-only">(current)</span></a>

@@ -5,6 +5,7 @@
  */
 package rashjz.info.com.az.controller;
 
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -18,9 +19,13 @@ import rashjz.info.com.az.domain.ListWrapper;
 import rashjz.info.com.az.entity.Brand;
 import rashjz.info.com.az.entity.Category;
 import rashjz.info.com.az.entity.Gender;
+import rashjz.info.com.az.entity.OrderMessage;
+import rashjz.info.com.az.entity.Orders;
 import rashjz.info.com.az.service.BrandCategoryService;
 import rashjz.info.com.az.service.CategoryService;
 import rashjz.info.com.az.service.GenderCategoryServise;
+import rashjz.info.com.az.service.OrderMessageService;
+import rashjz.info.com.az.service.OrderService;
 
 /**
  *
@@ -39,6 +44,33 @@ class AdviceController {
 
     @Autowired
     private GenderCategoryServise genderCategoryServise;
+    
+     @Autowired
+    OrderService orderService;
+    
+    @Autowired
+    OrderMessageService orderMessageService;
+    
+     @ModelAttribute("messageListCount")
+    public long mesaageListCount() {
+        long list = orderMessageService.getMessageListCount("1");
+        return list;
+    }
+     @ModelAttribute("newMessageList")
+    public List<OrderMessage> populateategoryList() {
+        List<OrderMessage> newMessageList = orderMessageService.getMessageList("1");
+        return newMessageList;
+    }
+     @ModelAttribute("orderCount")
+    public long orderListCount() {
+        long list = orderService.getByStatusType(5).size();
+        return list;
+    }
+     @ModelAttribute("newOrderList")
+    public List<Orders> newOrderList() {
+        List<Orders> newOrderList = orderService.getByStatusType(5);
+        return newOrderList;
+    }
 
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {

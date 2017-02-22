@@ -21,7 +21,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author rasha_000
+ * @author Azik
  */
 @Entity
 @Table(name = "product_view")

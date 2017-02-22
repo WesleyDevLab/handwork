@@ -23,7 +23,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 /**
  *
- * @author rasha_000
+ * @author Azik
  */
 @Entity
 @Table(name = "USER_ROLES")
@@ -108,8 +108,7 @@ public class UserRoles implements GrantedAuthority, Serializable {
     public String toString() {
         return "rashjz.info.com.az.entity.UserRoles[ userRoleId=" + userRoleId + " ]";
     }
-
-   @Override
+    @Override
     public String getAuthority() {
         return role;
     }

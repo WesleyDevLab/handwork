@@ -22,7 +22,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author rasha_000
+ * @author Azik
  */
 @Entity
 @Table(name = "brand")
@@ -43,12 +43,12 @@ public class Brand implements Serializable {
     private String name;
     @OneToMany(mappedBy = "brandId")
     private Collection<Products> productsCollection;
+    
     @Transient//not entity field
     public Boolean action;
 
     public Brand() {
     }
-
     public Boolean getAction() {
         return action;
     }
@@ -109,5 +109,5 @@ public class Brand implements Serializable {
     public String toString() {
         return "rashjz.info.com.az.entity.Brand[ id=" + id + " ]";
     }
-
+    
 }

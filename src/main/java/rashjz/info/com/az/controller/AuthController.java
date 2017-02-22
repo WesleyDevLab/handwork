@@ -51,32 +51,7 @@ public class AuthController implements Serializable {
     @Autowired
     MessageSource messageSource;
     
-    @Autowired
-    OrderService orderService;
-    
-    @Autowired
-    OrderMessageService orderMessageService;
-    
-     @ModelAttribute("messageListCount")
-    public long mesaageListCount() {
-        long list = orderMessageService.getMessageListCount("1");
-        return list;
-    }
-     @ModelAttribute("newMessageList")
-    public List<OrderMessage> populateategoryList() {
-        List<OrderMessage> newMessageList = orderMessageService.getMessageList("1");
-        return newMessageList;
-    }
-     @ModelAttribute("orderCount")
-    public long orderListCount() {
-        long list = orderService.getByStatusType(5).size();
-        return list;
-    }
-     @ModelAttribute("newMessageList")
-    public List<Orders> newOrderList() {
-        List<Orders> newOrderList = orderService.getByStatusType(5);
-        return newOrderList;
-    }
+   
    
 
     @RequestMapping(value = "/", method = RequestMethod.GET)

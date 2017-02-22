@@ -24,7 +24,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author rasha_000
+ * @author Azik
  */
 @Entity
 @Table(name = "order_message")
@@ -60,12 +60,12 @@ public class OrderMessage implements Serializable {
     @Size(max = 1)
     @Column(name = "status")
     private String status;
+    @JoinColumn(name = "p_id", referencedColumnName = "p_id")
+    @ManyToOne(optional = false)
+    private Products pId;
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @ManyToOne(optional = false)
     private Users userId;
-    @JoinColumn(name = "p_id", referencedColumnName = "p_id")
-    @ManyToOne(optional = false)
-    public Products pId;
 
     public OrderMessage() {
     }
@@ -122,20 +122,20 @@ public class OrderMessage implements Serializable {
         this.status = status;
     }
 
-    public Users getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Users userId) {
-        this.userId = userId;
-    }
-
     public Products getPId() {
         return pId;
     }
 
     public void setPId(Products pId) {
         this.pId = pId;
+    }
+
+    public Users getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Users userId) {
+        this.userId = userId;
     }
 
     @Override

@@ -55,7 +55,11 @@
                                 <a class="color1" href="products?catgs=[${function.catId}]">${function.name}</a>
                             </li>
                         </c:forEach> 
+                            <li id="#">
+                                 <a class="color1" href="#">Yeni Mehsul</a>
+                            </li>
                     </ul>
+                   
                     <div class="search">
                         <form action="products"   method="get">
                             <input type="text" name="keyValue" value="" placeholder="Axtarış...">

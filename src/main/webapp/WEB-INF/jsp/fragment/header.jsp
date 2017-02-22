@@ -18,9 +18,10 @@
         <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
         <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
         <!-- js -->
-        <script src="${pageContext.request.contextPath}/resources/js/jquery-1.10.2.js"></script>
+       
 
         <link href="${pageContext.request.contextPath}/resources/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+         <script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 
         <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 
@@ -123,7 +124,7 @@
                     <img style="max-height:35% ;max-width: 35%" src="${pageContext.request.contextPath}/resources/images/logo.png">
                 </a>			 
             </div>
-            <div class="header_right">
+                <div class="header_left" style="padding-right: 2%">
                 <!--                    <div class="cart box_1">
                                         <a href="checkout.html">
                                             <h3> <div class="total">
@@ -133,6 +134,11 @@
                                         <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
                                         <div class="clearfix"> </div>
                                     </div>				 -->
+                
+<!--                 <a href="${pageContext.request.contextPath}/index">
+                     <i class="fa fa-plus fa-5x" aria-hidden="true">Məhsul Əlavə Et</i>
+                    <img style="max-height:15% ;max-width: 15%" src="${pageContext.request.contextPath}/resources/images/logo.png">
+                </a>-->
             </div>
             <div class="clearfix"></div>	
         </div>

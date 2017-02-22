@@ -21,7 +21,7 @@ body a:hover{
 }
 /*-- header_top --*/
 .top_bg{
-    background:#f65a5b;
+    background:#ffffff;   
     padding: 10px 0;
 }
 .header_top{
@@ -90,7 +90,7 @@ body a:hover{
     text-align:center;
     padding: 0px 4px;
     font-size:13px;
-    color:#ffffff;
+    color:#9FA8AB;
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;

@@ -54,6 +54,10 @@
                     <li>
                         <a href="${pageContext.request.contextPath}/admin/listMassage"><i class="fa fa-envelope"></i> İsmarıc</a>
                     </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/admin/slideradmin"><i class="fa fa-envelope"></i> Slider</a>
+                    </li>
+                    
                 </ul>
 
             </div>

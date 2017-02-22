@@ -25,7 +25,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author rasha_000
+ * @author Azik
  */
 @Entity
 @Table(name = "USERS")
@@ -79,14 +79,16 @@ public class Users implements Serializable {
     @Column(name = "phone")
     private String phone;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private Collection<UserRoles> userRolesCollection;
+    @OneToMany(mappedBy = "insertUser")
+    private Collection<Products> productsCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<OrderMessage> orderMessageCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private Collection<Orders> ordersCollection;
     @JoinColumn(name = "gender_id", referencedColumnName = "gender_id")
     @ManyToOne
     private Gender genderId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<Orders> ordersCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<UserRoles> userRolesCollection;
 
     public Users() {
     }
@@ -174,20 +176,28 @@ public class Users implements Serializable {
         this.phone = phone;
     }
 
+    public Collection<UserRoles> getUserRolesCollection() {
+        return userRolesCollection;
+    }
+
+    public void setUserRolesCollection(Collection<UserRoles> userRolesCollection) {
+        this.userRolesCollection = userRolesCollection;
+    }
+
+    public Collection<Products> getProductsCollection() {
+        return productsCollection;
+    }
+
+    public void setProductsCollection(Collection<Products> productsCollection) {
+        this.productsCollection = productsCollection;
+    }
+
     public Collection<OrderMessage> getOrderMessageCollection() {
         return orderMessageCollection;
     }
 
     public void setOrderMessageCollection(Collection<OrderMessage> orderMessageCollection) {
         this.orderMessageCollection = orderMessageCollection;
-    }
-
-    public Gender getGenderId() {
-        return genderId;
-    }
-
-    public void setGenderId(Gender genderId) {
-        this.genderId = genderId;
     }
 
     public Collection<Orders> getOrdersCollection() {
@@ -198,12 +208,12 @@ public class Users implements Serializable {
         this.ordersCollection = ordersCollection;
     }
 
-    public Collection<UserRoles> getUserRolesCollection() {
-        return userRolesCollection;
+    public Gender getGenderId() {
+        return genderId;
     }
 
-    public void setUserRolesCollection(Collection<UserRoles> userRolesCollection) {
-        this.userRolesCollection = userRolesCollection;
+    public void setGenderId(Gender genderId) {
+        this.genderId = genderId;
     }
 
     @Override

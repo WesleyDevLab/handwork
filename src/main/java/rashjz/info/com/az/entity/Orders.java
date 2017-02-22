@@ -25,7 +25,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author rasha_000
+ * @author Azik
  */
 @Entity
 @Table(name = "orders")
@@ -49,15 +49,15 @@ public class Orders implements Serializable {
     @Column(name = "insert_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date insertDate;
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    @ManyToOne(optional = false)
-    private Users userId;
-    @JoinColumn(name = "product_id", referencedColumnName = "p_id")
-    @ManyToOne
-    private Products productId;
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     @ManyToOne
     private OrderStatus statusId;
+    @JoinColumn(name = "product_id", referencedColumnName = "p_id")
+    @ManyToOne
+    private Products productId;
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @ManyToOne(optional = false)
+    private Users userId;
     
     @Transient
     private Date toDate;
@@ -70,6 +70,22 @@ public class Orders implements Serializable {
 
     public Orders(Integer id) {
         this.id = id;
+    }
+
+    public Date getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(Date toDate) {
+        this.toDate = toDate;
+    }
+
+    public Date getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(Date fromDate) {
+        this.fromDate = fromDate;
     }
 
     public Orders(Integer id, Date insertDate) {
@@ -101,12 +117,12 @@ public class Orders implements Serializable {
         this.insertDate = insertDate;
     }
 
-    public Users getUserId() {
-        return userId;
+    public OrderStatus getStatusId() {
+        return statusId;
     }
 
-    public void setUserId(Users userId) {
-        this.userId = userId;
+    public void setStatusId(OrderStatus statusId) {
+        this.statusId = statusId;
     }
 
     public Products getProductId() {
@@ -117,31 +133,14 @@ public class Orders implements Serializable {
         this.productId = productId;
     }
 
-    public OrderStatus getStatusId() {
-        return statusId;
+    public Users getUserId() {
+        return userId;
     }
 
-    public void setStatusId(OrderStatus statusId) {
-        this.statusId = statusId;
+    public void setUserId(Users userId) {
+        this.userId = userId;
     }
 
-    public Date getToDate() {
-        return toDate;
-    }
-
-    public void setToDate(Date toDate) {
-        this.toDate = toDate;
-    }
-
-    public Date getFromDate() {
-        return fromDate;
-    }
-
-    public void setFromDate(Date fromDate) {
-        this.fromDate = fromDate;
-    }
-
-    
     @Override
     public int hashCode() {
         int hash = 0;

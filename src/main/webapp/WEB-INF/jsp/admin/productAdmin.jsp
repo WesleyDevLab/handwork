@@ -38,7 +38,7 @@
                                     <form:form id="headerSearchForm" action="productsadmin" modelAttribute="productsadmin" class="col-sm-3 col-md-3 col-lg-12"  method="GET">
 
                                         <div class="navbar-btn navbar-btn">
- 
+
                                             <spring:bind path="title">   
                                                 <div class="col-sm-3 col-md-3 col-lg-3"> 
                                                     <form:input path="title" type="text" class="form-control" id="title" placeholder="Enter Title"/>
@@ -71,15 +71,15 @@
                                             </spring:bind>
                                             <spring:bind path="categoryId.catId">  
                                                 <div class="col-sm-3 col-md-3 col-lg-3 "> 
-                                                    
+
                                                     <form:select id="keyValue" class="btn  btn active" path="categoryId.catId">
                                                         <option value=0>Category</option>
                                                         <c:forEach items="${categoryList}" var="cat">
                                                             <option value="${cat.catId}">${cat.name}</option>
                                                         </c:forEach>
                                                     </form:select>
-                                                            </div>
                                                 </div>
+
                                             </spring:bind> 
 
                                             <spring:bind path="genderId.genderId"> 

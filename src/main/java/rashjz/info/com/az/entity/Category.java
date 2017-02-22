@@ -26,7 +26,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author rasha_000
+ * @author Azik
  */
 @Entity
 @Table(name = "category")
@@ -61,20 +61,20 @@ public class Category implements Serializable {
     private String status;
     @OneToMany(mappedBy = "categoryId")
     private Collection<Products> productsCollection;
+    
     @Transient//not entity field
     public Boolean action;
 
     public Category() {
     }
 
-    public Boolean getAction() {
+      public Boolean getAction() {
         return action;
     }
 
     public void setAction(Boolean action) {
         this.action = action;
     }
-
     public Category(Integer catId) {
         this.catId = catId;
     }
@@ -156,5 +156,5 @@ public class Category implements Serializable {
     public String toString() {
         return "rashjz.info.com.az.entity.Category[ catId=" + catId + " ]";
     }
-
+    
 }

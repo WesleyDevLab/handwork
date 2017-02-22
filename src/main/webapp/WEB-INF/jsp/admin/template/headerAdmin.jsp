@@ -47,7 +47,7 @@
                     <ul class="dropdown-menu dropdown-messages">
                         <c:forEach items="${newMessageList}" var="msj">
                         <li>
-                            <a href="${pageContext.request.contextPath}/admin/userListMassage/${msj.userId.userId}/${msj.pId.pId}">
+                            <a href="${pageContext.request.contextPath}/userListMassage/${msj.userId.userId}/${msj.PId.PId}">
                                 <div>
                                     <strong>${msj.userId.firstname} ${msj.userId.lastname}</strong>
                                     <span class="pull-right text-muted">
@@ -74,10 +74,10 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-bell fa-fw"></i> ${orderCount}<i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
-                        <c:forEach items="${newMessageList}" var="order">
+                        <c:forEach items="${newOrderList}" var="order">
                         <li>
                             <a href="${pageContext.request.contextPath}/admin/checkoutList?statusId.id=5">
                                 <div>

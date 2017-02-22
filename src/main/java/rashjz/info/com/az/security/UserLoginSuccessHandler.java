@@ -37,6 +37,7 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         LOG.info("onAuthenticationSuccess : :");
         HttpSession session = httpServletRequest.getSession();
+        
         //getting AppUser data from Principal
         AppUser authUser = (AppUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         LOG.info("successfull login " + authUser.getUsers().toString());
