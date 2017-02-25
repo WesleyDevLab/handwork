@@ -101,14 +101,12 @@ public class UserController implements Serializable {
     }
     
     @InitBinder
-    protected void initBinder(WebDataBinder binder) {
-        //  binder.setValidator(customerFormValidator);
+    protected void initBinder(WebDataBinder binder) { 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
-
-//    Users users = AuthoritiesConverter.getUserObject().getUsers();
+ 
     @RequestMapping(value = "/productsuser", method = RequestMethod.GET)
     public String getProductsAll(Model model, @ModelAttribute("productsuser") Products products, Integer offset, Integer maxResults, BindingResult result) {
         System.out.println("---1");
@@ -182,8 +180,8 @@ public class UserController implements Serializable {
     }
     
     @RequestMapping(value = "/editproduct", method = RequestMethod.POST)
-    public String UpdateUser(@
-            ModelAttribute("product") Products product,
+    public String UpdateUser(
+            @ModelAttribute("product") Products product,
             BindingResult result, Model model,
             final RedirectAttributes redirectAttributes) {
         logger.info("Update-User - - - " + product.toString());
@@ -193,8 +191,8 @@ public class UserController implements Serializable {
         } else {
             redirectAttributes.addFlashAttribute("css", "success");
             redirectAttributes.addFlashAttribute("msg", "Product updated successfully!");
-            
-            productService.update(product);
+            product.setInsertDate(new Date());
+            productService.persist(product);
             
             return "redirect:/editproduct/" + product.getPId();
         }
@@ -234,13 +232,13 @@ public class UserController implements Serializable {
         return "redirect:/editproduct/" + pid;
     }
     
-    @RequestMapping(value = "/editproduct/uploadimagemulti", method = RequestMethod.POST)
+    @RequestMapping(value = "/product/add/uploadimagemulti", method = RequestMethod.POST)
     public String doUpload(HttpServletRequest request, HttpServletResponse response,
             @RequestParam("id") Integer id,
             @RequestParam("imagefile") List<MultipartFile> multipartFile) {
         
         for (MultipartFile file : multipartFile) {
-            logger.info("--------------- " + "  file " + file.getOriginalFilename() + " id " + id);
+            logger.info(" /product/add/uploadimagemulti --------------- " + "  file " + file.getOriginalFilename() + " id " + id);
             try {
                 if (file != null && !file.isEmpty()) {
                     String fileName = UUID.randomUUID().toString() + "." + getExt(file.getOriginalFilename());

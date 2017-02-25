@@ -279,7 +279,9 @@ public class Products implements Serializable {
 
     @Override
     public String toString() {
-        return "rashjz.info.com.az.entity.Products[ pId=" + pId + " ]";
+        return "Products{" + "pId=" + pId + ", title=" + title + ", description=" + description + ", insertDate=" + insertDate + ", price=" + price + ", viewId=" + viewId + ", note=" + note + ", status=" + status + ", productImageCollection=" + productImageCollection + ", productView=" + productView + ", brandId=" + brandId + ", categoryId=" + categoryId + ", genderId=" + genderId + ", insertUser=" + insertUser + ", orderMessageCollection=" + orderMessageCollection + ", ordersCollection=" + ordersCollection + ", toDate=" + toDate + ", fromDate=" + fromDate + '}';
     }
+
+   
     
 }

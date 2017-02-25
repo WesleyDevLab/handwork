@@ -13,16 +13,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Opal.az - Product User</title>
-        <link rel="shortcut icon"  href="${pageContext.request.contextPath}/resources/images/logo.png" type="image/png">
-<!--        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" /> 
-       <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
-        <script src="${pageContext.request.contextPath}/resources/js/bootstrap-datetimepicker.js"></script>-->
-
+        <link rel="shortcut icon"  href="${pageContext.request.contextPath}/resources/images/logo.png" type="image/png">  
     </head>
     <body>
-         <jsp:include page="fragment/header.jsp" />
+        <jsp:include page="fragment/header.jsp" />
         <jsp:include page="fragment/menu.jsp" />
         <spring:url value="/editproduct" var="actionUrl"/>
         <spring:url value="/products" var="action"/>
@@ -32,7 +28,7 @@
                 <div class="row col-md-offset-2  "  >
                     <div class="col-md-8" >
 
-                        <div class="panel panel-default col-md-12">
+                        <div style="margin-top: 10px;" class="panel panel-default col-md-12">
                             <div class="panel-body">
 
 
@@ -103,23 +99,7 @@
 
                                                         </div>
                                                     </spring:bind>
-
-                                                    <spring:bind path="insertDate">
-                                                        <div class=" form-group ${status.error ? 'has-error' : ''}">
-
-                                                            <label class="control-label col-sm-3 " for="insertDate">Insert Date:</label>
-                                                            <div class="col-sm-8"> 
-                                                                <div  class="input-group date" id="datetimepicker1"> 
-                                                                    <form:input path="insertDate" type="text" class="form-control" id="insertDate"  />
-                                                                    <form:errors path="insertDate" class="control-label" />
-                                                                    <span class="input-group-addon">
-                                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </spring:bind>
+ 
                                                     <spring:bind path="price">
                                                         <div class=" form-group ${status.error ? 'has-error' : ''}">
 
@@ -261,23 +241,15 @@
                         </div>
                     </div>
                 </div>
-                     
+
             </div>
-            
+
         </div>
 
-<jsp:include page="fragment/footer.jsp" />
+        <jsp:include page="fragment/footer.jsp" />
 
-        <script  type="text/javascript">
-            $(function () {
-                $("#datetimepicker1").datepicker({
-                    format: 'dd-mm-yyyy',
-                    autoclose: true,
-                    todayBtn: false,
-                    startDate: "01/01/2016"
-                });
-            });
-        </script>
-        <!-- /. WRAPPER  -->
- </body>
+ 
+        <script src="${pageContext.request.contextPath}/resources/js/bootstrap.js" charset="UTF-8"></script>
+     
+    </body>
 </html>
