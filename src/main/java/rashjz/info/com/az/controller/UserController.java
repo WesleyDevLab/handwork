@@ -5,7 +5,11 @@
  */
 package rashjz.info.com.az.controller;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.SortOrder;
@@ -50,6 +55,7 @@ import rashjz.info.com.az.service.GenderCategoryServise;
 import rashjz.info.com.az.service.ProductImagesService;
 import rashjz.info.com.az.service.ProductService;
 import rashjz.info.com.az.util.AuthoritiesConverter;
+import rashjz.info.com.az.util.ImageCompressor;
 import rashjz.info.com.az.util.StaticParams;
 
 /**
@@ -57,37 +63,37 @@ import rashjz.info.com.az.util.StaticParams;
  * @author Azik
  */
 @Controller
-public class UserController implements Serializable{
+public class UserController implements Serializable {
     
     private static final Logger logger = LoggerFactory.getLogger(UserController.class.getName());
-
+    
     @Autowired
     ProductService productService;
-
+    
     @Autowired
     ProductImagesService productImagesService;
-
+    
     @Autowired
     private CategoryService categoryService;
-
+    
     @Autowired
     private BrandCategoryService brandCategoryService;
-
+    
     @Autowired
     private GenderCategoryServise genderCategoryServise;
-
+    
     @ModelAttribute("categoryList")
     public List<Category> populateategoryList() {
         List<Category> list = categoryService.getAll(Category.class);
         return list;
     }
-
+    
     @ModelAttribute("brandList")
     public List<Brand> populateBrandList() {
         List<Brand> list = brandCategoryService.getAll(Brand.class);
         return list;
     }
-
+    
     @ModelAttribute("genderList")
     public List<Gender> populateLocList() {
         List<Gender> list = genderCategoryServise.getAll(Gender.class);
@@ -101,21 +107,20 @@ public class UserController implements Serializable{
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
-    
+
 //    Users users = AuthoritiesConverter.getUserObject().getUsers();
-   
-  @RequestMapping(value = "/productsuser", method = RequestMethod.GET)
+    @RequestMapping(value = "/productsuser", method = RequestMethod.GET)
     public String getProductsAll(Model model, @ModelAttribute("productsuser") Products products, Integer offset, Integer maxResults, BindingResult result) {
-       System.out.println("---1");
+        System.out.println("---1");
         AppUser authUser = (AppUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-       System.out.println("---1");
-       products.setInsertUser(authUser.getUsers());
-       System.out.println("9999 ----------------------------------------  "+products.getInsertUser().getUsername() + " "+ products.getInsertUser().getUserId());
+        System.out.println("---1");
+        products.setInsertUser(authUser.getUsers());
+        System.out.println("9999 ----------------------------------------  " + products.getInsertUser().getUsername() + " " + products.getInsertUser().getUserId());
         Map<String, Object> filters = new HashMap<>();
 //        products.setInsertUser(users);
         filters.put("", 0);
         if (result.hasErrors()) {
-            System.out.println("xxxxx "+result.getFieldError().getDefaultMessage());
+            System.out.println("xxxxx " + result.getFieldError().getDefaultMessage());
             return "login";
         }
         if (products == null) {
@@ -129,7 +134,7 @@ public class UserController implements Serializable{
             products.setInsertUser(authUser.getUsers());
             filters.put("insertUser", products.getInsertUser());
         }
-       
+        
         if (offset != null) {//new or old
 //            filters.put("typeId", "1");       
             if (products.getTitle() != null && !products.getTitle().equals("")) {
@@ -139,16 +144,16 @@ public class UserController implements Serializable{
                 filters.put("price", products.getPrice());
             }
             
-            if (products.getCategoryId() != null && !products.getCategoryId().equals("") && products.getCategoryId().getCatId()!=0) {
+            if (products.getCategoryId() != null && !products.getCategoryId().equals("") && products.getCategoryId().getCatId() != 0) {
                 filters.put("categoryId", products.getCategoryId().getCatId());
             }
-            if (products.getGenderId() != null && !products.getGenderId().equals("") && products.getGenderId().getGenderId()!=0) {
+            if (products.getGenderId() != null && !products.getGenderId().equals("") && products.getGenderId().getGenderId() != 0) {
                 filters.put("genderId", products.getGenderId().getGenderId());
             }
-            if (products.getBrandId() != null && !products.getBrandId().equals("") && products.getBrandId().getId()!=0) {
+            if (products.getBrandId() != null && !products.getBrandId().equals("") && products.getBrandId().getId() != 0) {
                 filters.put("brandId", products.getBrandId().getId());
             }
-            if (products.getToDate() != null && !products.getToDate().equals("") ) {
+            if (products.getToDate() != null && !products.getToDate().equals("")) {
                 filters.put("toDate", products.getToDate());
             }
             if (products.getFromDate() != null && !products.getFromDate().equals("")) {
@@ -165,17 +170,17 @@ public class UserController implements Serializable{
         model.addAttribute("offset", offset);
         return "productUser";
     }
-
+    
     @RequestMapping(value = "product/add", method = RequestMethod.GET)
     public String AddProductForm(Model model) {
-
+        
         logger.debug("showAddProductForm()");
-
+        
         Products product = new Products();
         model.addAttribute("product", product);
         return "editProduct";
     }
-
+    
     @RequestMapping(value = "/editproduct", method = RequestMethod.POST)
     public String UpdateUser(@
             ModelAttribute("product") Products product,
@@ -188,13 +193,13 @@ public class UserController implements Serializable{
         } else {
             redirectAttributes.addFlashAttribute("css", "success");
             redirectAttributes.addFlashAttribute("msg", "Product updated successfully!");
-
+            
             productService.update(product);
-
+            
             return "redirect:/editproduct/" + product.getPId();
         }
     }
-
+    
     @RequestMapping(value = "editproduct/{id}", method = RequestMethod.GET)
     public String EditUser(@PathVariable("id") int Id, Model model) {
         logger.debug("showProduct id: {}", Id);
@@ -202,7 +207,7 @@ public class UserController implements Serializable{
         model.addAttribute("product", products);
         return "editProduct";
     }
-
+    
     @RequestMapping(value = "product/{id}/delete", method = RequestMethod.GET)
     public String getDelete(@PathVariable("id") Integer id,
             final RedirectAttributes redirectAttributes) {
@@ -212,9 +217,9 @@ public class UserController implements Serializable{
         redirectAttributes.addFlashAttribute("css", "success");
         redirectAttributes.addFlashAttribute("msg", "Product is deleted!");
         return "redirect:/productsadmin";
-
+        
     }
-
+    
     @RequestMapping(value = "productimg/{id}/{pid}/delete", method = RequestMethod.GET)
     public String productImageDelete(
             @PathVariable("id") Integer id,
@@ -228,18 +233,28 @@ public class UserController implements Serializable{
         redirectAttributes.addFlashAttribute("msg", "Product Image is deleted!");
         return "redirect:/editproduct/" + pid;
     }
-
+    
     @RequestMapping(value = "/editproduct/uploadimagemulti", method = RequestMethod.POST)
     public String doUpload(HttpServletRequest request, HttpServletResponse response,
             @RequestParam("id") Integer id,
             @RequestParam("imagefile") List<MultipartFile> multipartFile) {
-       
+        
         for (MultipartFile file : multipartFile) {
             logger.info("--------------- " + "  file " + file.getOriginalFilename() + " id " + id);
             try {
                 if (file != null && !file.isEmpty()) {
                     String fileName = UUID.randomUUID().toString() + "." + getExt(file.getOriginalFilename());
-                    FileCopyUtils.copy(file.getBytes(), new File(StaticParams.UPLOAD_LOCATION + fileName));
+
+                    //additional 
+                    BufferedImage img = new ImageCompressor().getScaledInstance(ImageIO.read(file.getInputStream()), 600, 600, null, true);
+//                    byte[] imageBytes = ((DataBufferByte) img.getData().getDataBuffer()).getData();
+                    logger.info(img.getWidth() + img.getHeight() + " xxxxxxxxxxxxxxxxuuuuuxxxx");
+                    File f = new File(fileName);
+                    ImageIO.write(img, "jpg", f);
+                    
+                    FileCopyUtils.copy(f, new File(StaticParams.UPLOAD_LOCATION + fileName));
+
+//replace with imageBytes - file.getBytes()
                     //update userimage 
                     ProductImage image = new ProductImage();
                     Products p = new Products();
@@ -254,6 +269,6 @@ public class UserController implements Serializable{
             }
         }
         return "redirect:/editproduct/" + id;
-    }   
+    }
     
 }

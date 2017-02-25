@@ -11,6 +11,6 @@ package rashjz.info.com.az.util;
  */
 public class StaticParams {
 
-    public static String UPLOAD_LOCATION = "/home/rashad/uploads/";
-//    public static String UPLOAD_LOCATION =  "/D:/uploads/";  //fileI/ other location just D
+//    public static String UPLOAD_LOCATION = "/home/rashad/uploads/";
+    public static String UPLOAD_LOCATION =  "/D:/uploads/";  //fileI/ other location just D
 }

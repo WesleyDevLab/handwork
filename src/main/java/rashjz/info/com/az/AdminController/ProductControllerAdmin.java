@@ -5,6 +5,7 @@
  */
 package rashjz.info.com.az.AdminController;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.SortOrder;
@@ -46,6 +48,7 @@ import rashjz.info.com.az.service.CategoryService;
 import rashjz.info.com.az.service.GenderCategoryServise;
 import rashjz.info.com.az.service.ProductImagesService;
 import rashjz.info.com.az.service.ProductService;
+import rashjz.info.com.az.util.ImageCompressor;
 import rashjz.info.com.az.util.StaticParams;
 
 /**
@@ -224,7 +227,15 @@ public class ProductControllerAdmin implements Serializable {
             try {
                 if (file != null && !file.isEmpty()) {
                     String fileName = UUID.randomUUID().toString() + "." + getExt(file.getOriginalFilename());
-                    FileCopyUtils.copy(file.getBytes(), new File(StaticParams.UPLOAD_LOCATION + fileName));
+                    
+                    //additional 
+                    BufferedImage img = new ImageCompressor().getScaledInstance(ImageIO.read(file.getInputStream()), 600, 600, null, true);
+//                    byte[] imageBytes = ((DataBufferByte) img.getData().getDataBuffer()).getData();
+                    logger.info(img.getWidth() + img.getHeight() + " xxxxxxxxxxxxxxxxuuuuuxxxx");
+                    File f = new File(fileName);
+                    ImageIO.write(img, "jpg", f);
+                    
+                    FileCopyUtils.copy(f, new File(StaticParams.UPLOAD_LOCATION + fileName));
                     //update userimage 
                     ProductImage image = new ProductImage();
                     Products p = new Products();
