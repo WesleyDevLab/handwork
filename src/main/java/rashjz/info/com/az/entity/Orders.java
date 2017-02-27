@@ -25,7 +25,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Azik
+ * @author Mobby
  */
 @Entity
 @Table(name = "orders")
@@ -49,28 +49,19 @@ public class Orders implements Serializable {
     @Column(name = "insert_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date insertDate;
-    @JoinColumn(name = "status_id", referencedColumnName = "id")
-    @ManyToOne
-    private OrderStatus statusId;
-    @JoinColumn(name = "product_id", referencedColumnName = "p_id")
-    @ManyToOne
-    private Products productId;
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @ManyToOne(optional = false)
     private Users userId;
-    
-    @Transient
+    @JoinColumn(name = "product_id", referencedColumnName = "p_id")
+    @ManyToOne
+    private Products productId;
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
+    @ManyToOne
+    private OrderStatus statusId;
+    @Transient//not entity field
     private Date toDate;
-    
-    @Transient
+    @Transient//not entity field
     private Date fromDate;
-
-    public Orders() {
-    }
-
-    public Orders(Integer id) {
-        this.id = id;
-    }
 
     public Date getToDate() {
         return toDate;
@@ -86,6 +77,13 @@ public class Orders implements Serializable {
 
     public void setFromDate(Date fromDate) {
         this.fromDate = fromDate;
+    }
+
+    public Orders() {
+    }
+
+    public Orders(Integer id) {
+        this.id = id;
     }
 
     public Orders(Integer id, Date insertDate) {
@@ -117,12 +115,12 @@ public class Orders implements Serializable {
         this.insertDate = insertDate;
     }
 
-    public OrderStatus getStatusId() {
-        return statusId;
+    public Users getUserId() {
+        return userId;
     }
 
-    public void setStatusId(OrderStatus statusId) {
-        this.statusId = statusId;
+    public void setUserId(Users userId) {
+        this.userId = userId;
     }
 
     public Products getProductId() {
@@ -133,12 +131,12 @@ public class Orders implements Serializable {
         this.productId = productId;
     }
 
-    public Users getUserId() {
-        return userId;
+    public OrderStatus getStatusId() {
+        return statusId;
     }
 
-    public void setUserId(Users userId) {
-        this.userId = userId;
+    public void setStatusId(OrderStatus statusId) {
+        this.statusId = statusId;
     }
 
     @Override
@@ -165,5 +163,5 @@ public class Orders implements Serializable {
     public String toString() {
         return "rashjz.info.com.az.entity.Orders[ id=" + id + " ]";
     }
-    
+
 }

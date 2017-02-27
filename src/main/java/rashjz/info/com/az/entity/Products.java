@@ -20,7 +20,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,7 +29,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Azik
+ * @author Mobby
  */
 @Entity
 @Table(name = "products")
@@ -41,7 +40,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Products.findByDescription", query = "SELECT p FROM Products p WHERE p.description = :description"),
     @NamedQuery(name = "Products.findByInsertDate", query = "SELECT p FROM Products p WHERE p.insertDate = :insertDate"),
     @NamedQuery(name = "Products.findByPrice", query = "SELECT p FROM Products p WHERE p.price = :price"),
-    @NamedQuery(name = "Products.findByViewId", query = "SELECT p FROM Products p WHERE p.viewId = :viewId"),
+    @NamedQuery(name = "Products.findByViewCount", query = "SELECT p FROM Products p WHERE p.viewCount = :viewCount"),
     @NamedQuery(name = "Products.findByNote", query = "SELECT p FROM Products p WHERE p.note = :note"),
     @NamedQuery(name = "Products.findByStatus", query = "SELECT p FROM Products p WHERE p.status = :status")})
 public class Products implements Serializable {
@@ -51,7 +50,7 @@ public class Products implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "p_id")
-    private Integer pId;
+    public Integer pId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 125)
@@ -67,40 +66,43 @@ public class Products implements Serializable {
     private Date insertDate;
     @Column(name = "price")
     private Integer price;
-    @Column(name = "view_id")
-    private Integer viewId;
+    @Column(name = "view_count")
+    private Integer viewCount;
     @Size(max = 105)
     @Column(name = "note")
     private String note;
     @Size(max = 1)
     @Column(name = "status")
     private String status;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pId")
+    private Collection<OrderMessage> orderMessageCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private Collection<ProductImage> productImageCollection;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "products")
-    private ProductView productView;
-    @JoinColumn(name = "brand_id", referencedColumnName = "id")
-    @ManyToOne
-    private Brand brandId;
-    @JoinColumn(name = "category_id", referencedColumnName = "cat_id")
-    @ManyToOne
-    private Category categoryId;
-    @JoinColumn(name = "gender_id", referencedColumnName = "gender_id")
-    @ManyToOne
-    private Gender genderId;
+    @OneToMany(mappedBy = "productId")
+    private Collection<Orders> ordersCollection;
     @JoinColumn(name = "insert_user", referencedColumnName = "user_id")
     @ManyToOne
     private Users insertUser;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pId")
-    private Collection<OrderMessage> orderMessageCollection;
-    @OneToMany(mappedBy = "productId")
-    private Collection<Orders> ordersCollection;
-    @Transient
+    @JoinColumn(name = "gender_id", referencedColumnName = "gender_id")
+    @ManyToOne
+    private Gender genderId;
+    @JoinColumn(name = "category_id", referencedColumnName = "cat_id")
+    @ManyToOne
+    private Category categoryId;
+    @JoinColumn(name = "brand_id", referencedColumnName = "id")
+    @ManyToOne
+    private Brand brandId;
+    @Transient//not entity field
     private Date toDate;
-    @Transient
+    @Transient//not entity field
     private Date fromDate;
-   
-    public Products() {
+
+    public Integer getpId() {
+        return pId;
+    }
+
+    public void setpId(Integer pId) {
+        this.pId = pId;
     }
 
     public Date getToDate() {
@@ -118,7 +120,11 @@ public class Products implements Serializable {
     public void setFromDate(Date fromDate) {
         this.fromDate = fromDate;
     }
- 
+
+
+    public Products() {
+    }
+
     public Products(Integer pId) {
         this.pId = pId;
     }
@@ -169,12 +175,12 @@ public class Products implements Serializable {
         this.price = price;
     }
 
-    public Integer getViewId() {
-        return viewId;
+    public Integer getViewCount() {
+        return viewCount;
     }
 
-    public void setViewId(Integer viewId) {
-        this.viewId = viewId;
+    public void setViewCount(Integer viewCount) {
+        this.viewCount = viewCount;
     }
 
     public String getNote() {
@@ -193,6 +199,14 @@ public class Products implements Serializable {
         this.status = status;
     }
 
+    public Collection<OrderMessage> getOrderMessageCollection() {
+        return orderMessageCollection;
+    }
+
+    public void setOrderMessageCollection(Collection<OrderMessage> orderMessageCollection) {
+        this.orderMessageCollection = orderMessageCollection;
+    }
+
     public Collection<ProductImage> getProductImageCollection() {
         return productImageCollection;
     }
@@ -201,36 +215,12 @@ public class Products implements Serializable {
         this.productImageCollection = productImageCollection;
     }
 
-    public ProductView getProductView() {
-        return productView;
+    public Collection<Orders> getOrdersCollection() {
+        return ordersCollection;
     }
 
-    public void setProductView(ProductView productView) {
-        this.productView = productView;
-    }
-
-    public Brand getBrandId() {
-        return brandId;
-    }
-
-    public void setBrandId(Brand brandId) {
-        this.brandId = brandId;
-    }
-
-    public Category getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Category categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public Gender getGenderId() {
-        return genderId;
-    }
-
-    public void setGenderId(Gender genderId) {
-        this.genderId = genderId;
+    public void setOrdersCollection(Collection<Orders> ordersCollection) {
+        this.ordersCollection = ordersCollection;
     }
 
     public Users getInsertUser() {
@@ -241,20 +231,28 @@ public class Products implements Serializable {
         this.insertUser = insertUser;
     }
 
-    public Collection<OrderMessage> getOrderMessageCollection() {
-        return orderMessageCollection;
+    public Gender getGenderId() {
+        return genderId;
     }
 
-    public void setOrderMessageCollection(Collection<OrderMessage> orderMessageCollection) {
-        this.orderMessageCollection = orderMessageCollection;
+    public void setGenderId(Gender genderId) {
+        this.genderId = genderId;
     }
 
-    public Collection<Orders> getOrdersCollection() {
-        return ordersCollection;
+    public Category getCategoryId() {
+        return categoryId;
     }
 
-    public void setOrdersCollection(Collection<Orders> ordersCollection) {
-        this.ordersCollection = ordersCollection;
+    public void setCategoryId(Category categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public Brand getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(Brand brandId) {
+        this.brandId = brandId;
     }
 
     @Override
@@ -279,9 +277,7 @@ public class Products implements Serializable {
 
     @Override
     public String toString() {
-        return "Products{" + "pId=" + pId + ", title=" + title + ", description=" + description + ", insertDate=" + insertDate + ", price=" + price + ", viewId=" + viewId + ", note=" + note + ", status=" + status + ", productImageCollection=" + productImageCollection + ", productView=" + productView + ", brandId=" + brandId + ", categoryId=" + categoryId + ", genderId=" + genderId + ", insertUser=" + insertUser + ", orderMessageCollection=" + orderMessageCollection + ", ordersCollection=" + ordersCollection + ", toDate=" + toDate + ", fromDate=" + fromDate + '}';
+        return "rashjz.info.com.az.entity.Products[ pId=" + pId + " ]";
     }
-
-   
     
 }

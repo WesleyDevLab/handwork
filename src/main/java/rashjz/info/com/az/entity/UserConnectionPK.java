@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Azik
+ * @author Mobby
  */
 @Embeddable
 public class UserConnectionPK implements Serializable {

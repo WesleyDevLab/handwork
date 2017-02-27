@@ -73,7 +73,7 @@
                                                     <form:hidden path="categoryId.catId" />
                                                     <form:hidden path="genderId.genderId" />
                                                     <form:hidden path="brandId.id" />
-                                                    <form:hidden path="productView.productId" />
+                                                    <%--<form:hidden path="productView.productId.pId" />--%>
 
 
                                                     <spring:bind path="title">
@@ -112,13 +112,13 @@
                                                         </div>
                                                     </spring:bind>
 
-                                                    <spring:bind path="viewId">
+                                                    <spring:bind path="viewCount">
                                                         <div class=" form-group ${status.error ? 'has-error' : ''}">
 
                                                             <label class="control-label col-sm-3 " for="viewId">View:</label>
                                                             <div class="col-sm-8"> 
-                                                                <form:input path="viewId" type="text" class="form-control" id="viewId"  />
-                                                                <form:errors path="viewId" class="control-label" />
+                                                                <form:input path="viewCount" type="text" class="form-control" id="viewId"  />
+                                                                <form:errors path="viewCount" class="control-label" />
                                                             </div>
 
                                                         </div>

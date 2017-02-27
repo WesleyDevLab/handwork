@@ -94,4 +94,17 @@ public class ProductServiceImpl implements Serializable, ProductService {
         return productDao.getforcategory(product);
     }
 
+    @Override
+    public void AddOrUpdateProduct(Products product) {
+ 
+        if (product.getPId()==null || product.getPId()==0) {
+            System.out.println("---------------------- 1");
+            System.out.println("-------------------------------- "+product.toString());
+            productDao.persist(product);
+        }else{
+            productDao.update(product);
+        }
+    }
+    
+
 }

@@ -26,7 +26,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Azik
+ * @author Mobby
  */
 @Entity
 @Table(name = "category")
@@ -61,20 +61,19 @@ public class Category implements Serializable {
     private String status;
     @OneToMany(mappedBy = "categoryId")
     private Collection<Products> productsCollection;
-    
     @Transient//not entity field
-    public Boolean action;
+   public Boolean action;
 
-    public Category() {
-    }
-
-      public Boolean getAction() {
+    public Boolean getAction() {
         return action;
     }
 
     public void setAction(Boolean action) {
         this.action = action;
     }
+    public Category() {
+    }
+
     public Category(Integer catId) {
         this.catId = catId;
     }

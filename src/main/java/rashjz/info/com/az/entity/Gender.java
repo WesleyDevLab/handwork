@@ -21,7 +21,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Azik
+ * @author Mobby
  */
 @Entity
 @Table(name = "gender")
@@ -41,9 +41,9 @@ public class Gender implements Serializable {
     @Column(name = "type")
     private String type;
     @OneToMany(mappedBy = "genderId")
-    private Collection<Products> productsCollection;
-    @OneToMany(mappedBy = "genderId")
     private Collection<Users> usersCollection;
+    @OneToMany(mappedBy = "genderId")
+    private Collection<Products> productsCollection;
 
     public Gender() {
     }
@@ -68,20 +68,20 @@ public class Gender implements Serializable {
         this.type = type;
     }
 
-    public Collection<Products> getProductsCollection() {
-        return productsCollection;
-    }
-
-    public void setProductsCollection(Collection<Products> productsCollection) {
-        this.productsCollection = productsCollection;
-    }
-
     public Collection<Users> getUsersCollection() {
         return usersCollection;
     }
 
     public void setUsersCollection(Collection<Users> usersCollection) {
         this.usersCollection = usersCollection;
+    }
+
+    public Collection<Products> getProductsCollection() {
+        return productsCollection;
+    }
+
+    public void setProductsCollection(Collection<Products> productsCollection) {
+        this.productsCollection = productsCollection;
     }
 
     @Override

@@ -269,7 +269,7 @@
         <script  type="text/javascript">
             $(function () {
                 $("#datetimepicker1").datepicker({
-                    format: 'dd-mm-yyyy',
+                    format: 'yyyy-mm-dd',
                     autoclose: true,
                     todayBtn: false,
                     startDate: "01/01/2016"

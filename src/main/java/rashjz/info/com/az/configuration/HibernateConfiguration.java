@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.ImprovedNamingStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -36,6 +37,7 @@ public class HibernateConfiguration {
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan(new String[]{"rashjz.info.com.az.entity"});
         sessionFactory.setHibernateProperties(hibernateProperties());
+//        sessionFactory.setNamingStrategy(new ImprovedNamingStrategy());
         return sessionFactory;
     }
 

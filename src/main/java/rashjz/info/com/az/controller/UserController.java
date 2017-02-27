@@ -64,49 +64,49 @@ import rashjz.info.com.az.util.StaticParams;
  */
 @Controller
 public class UserController implements Serializable {
-    
+
     private static final Logger logger = LoggerFactory.getLogger(UserController.class.getName());
-    
+
     @Autowired
     ProductService productService;
-    
+
     @Autowired
     ProductImagesService productImagesService;
-    
+
     @Autowired
     private CategoryService categoryService;
-    
+
     @Autowired
     private BrandCategoryService brandCategoryService;
-    
+
     @Autowired
     private GenderCategoryServise genderCategoryServise;
-    
+
     @ModelAttribute("categoryList")
     public List<Category> populateategoryList() {
         List<Category> list = categoryService.getAll(Category.class);
         return list;
     }
-    
+
     @ModelAttribute("brandList")
     public List<Brand> populateBrandList() {
         List<Brand> list = brandCategoryService.getAll(Brand.class);
         return list;
     }
-    
+
     @ModelAttribute("genderList")
     public List<Gender> populateLocList() {
         List<Gender> list = genderCategoryServise.getAll(Gender.class);
         return list;
     }
-    
+SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     @InitBinder
-    protected void initBinder(WebDataBinder binder) { 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    protected void initBinder(WebDataBinder binder) {
+        
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
- 
+
     @RequestMapping(value = "/productsuser", method = RequestMethod.GET)
     public String getProductsAll(Model model, @ModelAttribute("productsuser") Products products, Integer offset, Integer maxResults, BindingResult result) {
         System.out.println("---1");
@@ -132,7 +132,7 @@ public class UserController implements Serializable {
             products.setInsertUser(authUser.getUsers());
             filters.put("insertUser", products.getInsertUser());
         }
-        
+
         if (offset != null) {//new or old
 //            filters.put("typeId", "1");       
             if (products.getTitle() != null && !products.getTitle().equals("")) {
@@ -141,7 +141,7 @@ public class UserController implements Serializable {
             if (products.getPrice() != null && !products.getPrice().equals("")) {
                 filters.put("price", products.getPrice());
             }
-            
+
             if (products.getCategoryId() != null && !products.getCategoryId().equals("") && products.getCategoryId().getCatId() != 0) {
                 filters.put("categoryId", products.getCategoryId().getCatId());
             }
@@ -159,7 +159,7 @@ public class UserController implements Serializable {
             }
             filters.put("insertUser", products.getInsertUser().getUserId());
         }
-        
+
         pagingData = productService.lazyLoadProductsAdmin(offset.intValue(), 10, null, SortOrder.UNSORTED, filters);
         productService.lazyLoadProductsCountAdmin(offset.intValue(), 10, null, SortOrder.UNSORTED, filters, pagingData);
         model.addAttribute("productsList", pagingData.getList());
@@ -168,17 +168,17 @@ public class UserController implements Serializable {
         model.addAttribute("offset", offset);
         return "productUser";
     }
-    
+
     @RequestMapping(value = "product/add", method = RequestMethod.GET)
     public String AddProductForm(Model model) {
-        
+
         logger.debug("showAddProductForm()");
-        
+
         Products product = new Products();
         model.addAttribute("product", product);
         return "editProduct";
     }
-    
+
     @RequestMapping(value = "/editproduct", method = RequestMethod.POST)
     public String UpdateUser(
             @ModelAttribute("product") Products product,
@@ -190,14 +190,27 @@ public class UserController implements Serializable {
             return "403";
         } else {
             redirectAttributes.addFlashAttribute("css", "success");
-            redirectAttributes.addFlashAttribute("msg", "Product updated successfully!");
-            product.setInsertDate(new Date());
-            productService.persist(product);
+            if (product.getPId() == null) {
+                redirectAttributes.addFlashAttribute("msg", "Product updated successfully!");
+            } else {
+                redirectAttributes.addFlashAttribute("msg", "Product updated successfully!");
+            }
+            try {
+               String dt=dateFormat.format(new Date());
+                System.out.println("----------------------- "+dt);
+            product.setInsertDate(dateFormat.parse(dt)); 
+             productService.AddOrUpdateProduct(product);
             
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+           
+
             return "redirect:/editproduct/" + product.getPId();
         }
     }
-    
+
     @RequestMapping(value = "editproduct/{id}", method = RequestMethod.GET)
     public String EditUser(@PathVariable("id") int Id, Model model) {
         logger.debug("showProduct id: {}", Id);
@@ -205,7 +218,7 @@ public class UserController implements Serializable {
         model.addAttribute("product", products);
         return "editProduct";
     }
-    
+
     @RequestMapping(value = "product/{id}/delete", method = RequestMethod.GET)
     public String getDelete(@PathVariable("id") Integer id,
             final RedirectAttributes redirectAttributes) {
@@ -215,9 +228,9 @@ public class UserController implements Serializable {
         redirectAttributes.addFlashAttribute("css", "success");
         redirectAttributes.addFlashAttribute("msg", "Product is deleted!");
         return "redirect:/productsadmin";
-        
+
     }
-    
+
     @RequestMapping(value = "productimg/{id}/{pid}/delete", method = RequestMethod.GET)
     public String productImageDelete(
             @PathVariable("id") Integer id,
@@ -231,12 +244,12 @@ public class UserController implements Serializable {
         redirectAttributes.addFlashAttribute("msg", "Product Image is deleted!");
         return "redirect:/editproduct/" + pid;
     }
-    
+
     @RequestMapping(value = "/product/add/uploadimagemulti", method = RequestMethod.POST)
     public String doUpload(HttpServletRequest request, HttpServletResponse response,
             @RequestParam("id") Integer id,
             @RequestParam("imagefile") List<MultipartFile> multipartFile) {
-        
+
         for (MultipartFile file : multipartFile) {
             logger.info(" /product/add/uploadimagemulti --------------- " + "  file " + file.getOriginalFilename() + " id " + id);
             try {
@@ -249,7 +262,7 @@ public class UserController implements Serializable {
                     logger.info(img.getWidth() + img.getHeight() + " xxxxxxxxxxxxxxxxuuuuuxxxx");
                     File f = new File(fileName);
                     ImageIO.write(img, "jpg", f);
-                    
+
                     FileCopyUtils.copy(f, new File(StaticParams.UPLOAD_LOCATION + fileName));
 
 //replace with imageBytes - file.getBytes()
@@ -268,5 +281,5 @@ public class UserController implements Serializable {
         }
         return "redirect:/editproduct/" + id;
     }
-    
+
 }

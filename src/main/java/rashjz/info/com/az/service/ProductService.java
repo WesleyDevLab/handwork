@@ -27,6 +27,8 @@ public interface ProductService {
     public void update(Products entity);
 
     public void persist(Products entity);
+    
+    public void AddOrUpdateProduct(Products product);
 
     public Products getByKey(Integer key);
 

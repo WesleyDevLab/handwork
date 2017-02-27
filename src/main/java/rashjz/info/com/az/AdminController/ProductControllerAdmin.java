@@ -171,6 +171,7 @@ public class ProductControllerAdmin implements Serializable {
             final RedirectAttributes redirectAttributes) {
         logger.info("Update-User - - - " + product.toString());
         if (result.hasErrors()) {
+            System.out.println("----------------------------- 99999999999999999999 "+result.toString());
             logger.info("Update-User- - - " + result.toString());
             return "403";
         } else {

@@ -24,7 +24,6 @@ import org.hibernate.sql.JoinType;
 import org.springframework.stereotype.Repository;
 import rashjz.info.com.az.domain.PagingResult;
 import rashjz.info.com.az.entity.ProductImage;
-import rashjz.info.com.az.entity.ProductView;
 import rashjz.info.com.az.entity.Products;
 import rashjz.info.com.az.entity.Users;
 
@@ -93,17 +92,17 @@ public class ProductImpl extends AbstractDao<Integer, Products> implements Seria
 
     @Override
     public List<ProductImage> getMostProducts() {
-        List< ProductView> listProductses = new ArrayList<>();
+        List< Products> listProductses = new ArrayList<>();
 
         List< ProductImage> listImage = new ArrayList<>();
         Session session = getSession();
         try {
-            Criteria criteria = session.createCriteria(ProductView.class);
-            criteria.addOrder(Order.desc("count"));
+            Criteria criteria = session.createCriteria(Products.class);
+            criteria.addOrder(Order.desc("viewCount"));
             criteria.setMaxResults(5);
             listProductses = criteria.list();
             for (int i = 0; i < listProductses.size(); i++) {
-                Products p = listProductses.get(i).getProducts();
+                Products p = listProductses.get(i);
                 if (p.getProductImageCollection().size() > 0) {
                     listImage.add((ProductImage) p.getProductImageCollection().toArray()[0]);
                 }
