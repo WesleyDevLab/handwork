@@ -53,7 +53,7 @@
                                         </c:if>  
                                         <c:choose>
                                             <c:when test="${product.PId==0 || product.PId==null}">
-                                                <h1 class="col-sm-8 col-xs-push-1">Add Product</h1>
+                                                <h1 class="col-sm-8 col-xs-push-1">Elanın Əlavə edilməsi və redaktəsi</h1>
                                                 <h5 class="col-sm-8 col-xs-push-1"></h5>
 
                                             </c:when>
@@ -70,16 +70,10 @@
                                                 <form:form class="form-horizontal"  method="POST" modelAttribute="product" action="${actionUrl}">
                                                     <form:hidden path="pId" />
 
-                                                    <form:hidden path="categoryId.catId" />
-                                                    <form:hidden path="genderId.genderId" />
-                                                    <form:hidden path="brandId.id" />
-                                                    <%--<form:hidden path="productView.productId.pId" />--%>
-
-
                                                     <spring:bind path="title">
                                                         <div class=" form-group ${status.error ? 'has-error' : ''}">
 
-                                                            <label class="control-label col-sm-3 " for="title">Title:</label>
+                                                            <label class="control-label col-sm-3 " for="title">Başlıq:</label>
                                                             <div class="col-sm-8"> 
                                                                 <form:input path="title" type="text" class="form-control" id="title"/>
                                                                 <form:errors path="title" class="control-label" />
@@ -90,7 +84,7 @@
                                                     <spring:bind path="description">
                                                         <div class=" form-group ${status.error ? 'has-error' : ''}">
 
-                                                            <label class="control-label col-sm-3 " for="description">Description:</label>
+                                                            <label class="control-label col-sm-3 " for="description">Ətraflı:</label>
                                                             <div class="col-sm-8"> 
 
                                                                 <form:textarea path="description" type="text" class="form-control" id="description" rows="9" cols="30" />
@@ -99,11 +93,11 @@
 
                                                         </div>
                                                     </spring:bind>
- 
+
                                                     <spring:bind path="price">
                                                         <div class=" form-group ${status.error ? 'has-error' : ''}">
 
-                                                            <label class="control-label col-sm-3 " for="phone">Price:</label>
+                                                            <label class="control-label col-sm-3 " for="phone">Qiymət:</label>
                                                             <div class="col-sm-8"> 
                                                                 <form:input path="price" type="text" class="form-control" id="price"  />
                                                                 <form:errors path="price" class="control-label" />
@@ -112,21 +106,10 @@
                                                         </div>
                                                     </spring:bind>
 
-                                                    <spring:bind path="viewCount">
-                                                        <div class=" form-group ${status.error ? 'has-error' : ''}">
-
-                                                            <label class="control-label col-sm-3 " for="viewId">View:</label>
-                                                            <div class="col-sm-8"> 
-                                                                <form:input path="viewCount" type="text" class="form-control" id="viewId"  />
-                                                                <form:errors path="viewCount" class="control-label" />
-                                                            </div>
-
-                                                        </div>
-                                                    </spring:bind>
                                                     <spring:bind path="note">
                                                         <div class=" form-group ${status.error ? 'has-error' : ''}">
 
-                                                            <label class="control-label col-sm-3 " for="phone">Note:</label>
+                                                            <label class="control-label col-sm-3 " for="phone">Qeyd:</label>
                                                             <div class="col-sm-8"> 
                                                                 <form:input path="note" type="text" class="form-control" id="note"  />
                                                                 <form:errors path="note" class="control-label" />
@@ -134,58 +117,64 @@
 
                                                         </div>
                                                     </spring:bind>
-                                                    <spring:bind path="categoryId.name">
+
+                                                    <spring:bind path="categoryId.catId">
                                                         <div class=" form-group ${status.error ? 'has-error' : ''}">
-                                                            <label class="control-label col-sm-3 " for="categoryId.name">Category</label>
+                                                            <label class="control-label col-sm-3 " for="categoryId">Kateqoriya:</label>
                                                             <div class="col-sm-8"> 
-                                                                <form:select id="categoryId.name" class="form-control" path="categoryId.name">
-                                                                    <form:options value="0"  label="Select Category"></form:options>
-                                                                    <form:options  items="${categoryList}" itemLabel="name" />
+                                                                <form:select id="categoryId" class="form-control" path="categoryId.catId">
+                                                                    <form:option value="NONE"  label="Kateqoriya seçimi"></form:option>
+                                                                    <form:options  items="${categoryList}" itemValue="catId" itemLabel="name" />
                                                                 </form:select>
-                                                                <form:errors path="categoryId.name" class="control-label" />
+                                                                <form:errors path="categoryId.catId" class="control-label" />
                                                             </div>
                                                         </div>
                                                     </spring:bind> 
-                                                    <spring:bind path="brandId.name">
+
+                                                    <spring:bind path="brandId.id">
                                                         <div class=" form-group ${status.error ? 'has-error' : ''}">
 
-                                                            <label class="control-label col-sm-3 " for="brandId.name">Brand:</label>
+                                                            <label class="control-label col-sm-3 " for="brandId">Brend:</label>
                                                             <div class="col-sm-8"> 
-                                                                <form:select id="brandId.name" class="form-control" path="brandId.name">
-                                                                    <form:options value="0"  label="Select Brand"></form:options>
-                                                                    <form:options  items="${brandList}" itemLabel="name" />
+                                                                <form:select class="form-control" path="brandId.id">
+                                                                    <form:option value="NONE"  label="Brend seçimi"></form:option>
+                                                                    <form:options  items="${brandList}" itemValue="id" itemLabel="name" />
                                                                 </form:select>
-                                                                <form:errors path="brandId.name" class="control-label" />
-                                                            </div>
-
-                                                        </div>
-                                                    </spring:bind> 
-                                                    <spring:bind path="genderId.type">
-                                                        <div class=" form-group ${status.error ? 'has-error' : ''}">
-
-                                                            <label class="control-label col-sm-3 " for="genderId">Cinsi</label>
-                                                            <div class="col-sm-8"> 
-                                                                <form:select id="genderId.type" class="form-control" path="genderId.type">
-                                                                    <form:options value="0"  label="Select Gender"></form:options>
-                                                                    <form:options  items="${genderList}" itemLabel="type" />
-                                                                </form:select>
-                                                                <form:errors path="genderId.type" class="control-label" />
-                                                            </div>
-
+                                                                <form:errors path="brandId.id" class="control-label" />
+                                                            </div> 
                                                         </div>
                                                     </spring:bind> 
 
-                                                    <spring:bind path="status">
+                                                    <spring:bind path="genderId.genderId">
                                                         <div class=" form-group ${status.error ? 'has-error' : ''}">
 
-                                                            <label class="control-label col-sm-3 " for="status">Status:</label>
+                                                            <label class="control-label col-sm-3 " for="genderId.genderId">Cins:</label>
                                                             <div class="col-sm-8"> 
-                                                                <form:input path="status" type="text" class="form-control" id="status"  />
-                                                                <form:errors path="status" class="control-label" />
-                                                            </div>
-
+                                                                <form:select id="genderId.type" class="form-control" path="genderId.genderId">
+                                                                    <form:option value="NONE"  label="Cinsi seçin"></form:option>
+                                                                    <form:options  items="${genderList}" itemValue="genderId" itemLabel="type" />
+                                                                </form:select>
+                                                                <form:errors path="genderId.genderId" class="control-label" />
+                                                            </div> 
                                                         </div>
                                                     </spring:bind>
+                                                    
+                                                    
+                                                    
+                                                    <c:if test="${product.PId!=null}">
+
+                                                        <spring:bind path="status">
+                                                            <div class=" form-group ${status.error ? 'has-error' : ''}">
+
+                                                                <label class="control-label col-sm-3 " for="status">Status:</label>
+                                                                <div class="col-sm-8"> 
+                                                                    <form:input path="status" type="text" class="form-control" id="status"  />
+                                                                    <form:errors path="status" class="control-label" />
+                                                                </div> 
+                                                            </div>
+                                                        </spring:bind>
+                                                        
+                                                    </c:if>
 
                                                     <c:choose>
                                                         <c:when test="${product.PId==null}">
@@ -248,8 +237,8 @@
 
         <jsp:include page="fragment/footer.jsp" />
 
- 
+
         <script src="${pageContext.request.contextPath}/resources/js/bootstrap.js" charset="UTF-8"></script>
-     
+
     </body>
 </html>

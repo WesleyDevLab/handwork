@@ -7,6 +7,7 @@ package rashjz.info.com.az.controller;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+import java.beans.PropertyEditorSupport;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -30,6 +31,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -81,6 +83,7 @@ public class UserController implements Serializable {
 
     @Autowired
     private GenderCategoryServise genderCategoryServise;
+    
 
     @ModelAttribute("categoryList")
     public List<Category> populateategoryList() {
@@ -99,12 +102,23 @@ public class UserController implements Serializable {
         List<Gender> list = genderCategoryServise.getAll(Gender.class);
         return list;
     }
-SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
-        
+
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+        
+//            binder.registerCustomEditor(Brand.class, "brandId", new PropertyEditorSupport() {
+//            @Override
+//            public void setAsText(String text) {
+//                logger.info("xxxxxxxxxxxxxxxxxxx " + text);
+////            Server type = (Server) em.createNamedQuery("Server.findById")
+////                .setParameter("id", Short.parseShort(text)).getSingleResult();
+//                setValue(new Brand(1));
+//            }
+//        });
     }
 
     @RequestMapping(value = "/productsuser", method = RequestMethod.GET)
@@ -169,44 +183,36 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return "productUser";
     }
 
-    @RequestMapping(value = "product/add", method = RequestMethod.GET)
-    public String AddProductForm(Model model) {
-
-        logger.debug("showAddProductForm()");
-
-        Products product = new Products();
-        model.addAttribute("product", product);
-        return "editProduct";
+    @RequestMapping(value = "/product/add", method = RequestMethod.GET)
+    public String AddProductForm(Model model) { 
+        model.addAttribute("product", new Products());
+        return "userProduct";
     }
 
+ 
     @RequestMapping(value = "/editproduct", method = RequestMethod.POST)
     public String UpdateUser(
             @ModelAttribute("product") Products product,
             BindingResult result, Model model,
             final RedirectAttributes redirectAttributes) {
-        logger.info("Update-User - - - " + product.toString());
+        
         if (result.hasErrors()) {
-            logger.info("Update-User- - - " + result.toString());
-            return "403";
+//            logger.info("result.hasErrors() - - - " + result.toString());
+            return "userProduct";
         } else {
-            redirectAttributes.addFlashAttribute("css", "success");
-            if (product.getPId() == null) {
-                redirectAttributes.addFlashAttribute("msg", "Product updated successfully!");
-            } else {
-                redirectAttributes.addFlashAttribute("msg", "Product updated successfully!");
-            }
+//            redirectAttributes.addFlashAttribute("css", "success");
             try {
-               String dt=dateFormat.format(new Date());
-                System.out.println("----------------------- "+dt);
-            product.setInsertDate(dateFormat.parse(dt)); 
-             productService.AddOrUpdateProduct(product);
-            
+                product.setInsertDate(new Date());
+                logger.info("iiiiiiiiiiiiiiiiiiiiiiiiii " + product.getBrandId().getId()+" "+product.getCategoryId().getCatId()+" "+product.getGenderId().getGenderId());
+                productService.persist(product);
+                //            if (product.getPId() == null) {
+//                redirectAttributes.addFlashAttribute("msg", "Product updated successfully!");
+//            } else {
+//                redirectAttributes.addFlashAttribute("msg", "Product updated successfully!");
+//            }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            
-           
-
             return "redirect:/editproduct/" + product.getPId();
         }
     }
@@ -216,7 +222,7 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         logger.debug("showProduct id: {}", Id);
         Products products = productService.getByKey(Id);
         model.addAttribute("product", products);
-        return "editProduct";
+        return "userProduct";
     }
 
     @RequestMapping(value = "product/{id}/delete", method = RequestMethod.GET)

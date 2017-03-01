@@ -5,7 +5,6 @@
  */
 package rashjz.info.com.az.dao;
 
-import com.mysql.cj.core.log.Slf4JLogger;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
