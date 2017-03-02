@@ -58,6 +58,7 @@ import rashjz.info.com.az.service.ProductImagesService;
 import rashjz.info.com.az.service.ProductService;
 import rashjz.info.com.az.util.AuthoritiesConverter;
 import rashjz.info.com.az.util.ImageCompressor;
+import rashjz.info.com.az.util.SecurityUtil;
 import rashjz.info.com.az.util.StaticParams;
 
 /**
@@ -83,7 +84,6 @@ public class UserController implements Serializable {
 
     @Autowired
     private GenderCategoryServise genderCategoryServise;
-    
 
     @ModelAttribute("categoryList")
     public List<Category> populateategoryList() {
@@ -109,7 +109,7 @@ public class UserController implements Serializable {
 
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-        
+
 //            binder.registerCustomEditor(Brand.class, "brandId", new PropertyEditorSupport() {
 //            @Override
 //            public void setAsText(String text) {
@@ -184,32 +184,35 @@ public class UserController implements Serializable {
     }
 
     @RequestMapping(value = "/product/add", method = RequestMethod.GET)
-    public String AddProductForm(Model model) { 
+    public String AddProductForm(Model model) {
         model.addAttribute("product", new Products());
         return "userProduct";
     }
 
- 
     @RequestMapping(value = "/editproduct", method = RequestMethod.POST)
     public String UpdateUser(
             @ModelAttribute("product") Products product,
             BindingResult result, Model model,
             final RedirectAttributes redirectAttributes) {
-        
+
         if (result.hasErrors()) {
 //            logger.info("result.hasErrors() - - - " + result.toString());
             return "userProduct";
         } else {
 //            redirectAttributes.addFlashAttribute("css", "success");
             try {
-                product.setInsertDate(new Date());
-                logger.info("iiiiiiiiiiiiiiiiiiiiiiiiii " + product.getBrandId().getId()+" "+product.getCategoryId().getCatId()+" "+product.getGenderId().getGenderId());
+
+                if (product.getPId() == null) {
+                    product.setInsertDate(new Date());
+                    logger.info("iiiiiiiiiiiiiiiiiiiiiiiiii " + product.getBrandId().getId() + " " + product.getCategoryId().getCatId() + " " + product.getGenderId().getGenderId());
+                    product.setInsertUser(AuthoritiesConverter.getUserObject().getUsers());
+                    product.setStatus("a");
+//                    redirectAttributes.addFlashAttribute("msg", "Product updated successfully!");
+                }
                 productService.persist(product);
-                //            if (product.getPId() == null) {
-//                redirectAttributes.addFlashAttribute("msg", "Product updated successfully!");
-//            } else {
-//                redirectAttributes.addFlashAttribute("msg", "Product updated successfully!");
-//            }
+//                else {
+//                    redirectAttributes.addFlashAttribute("msg", "Product updated successfully!");
+//                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -251,7 +254,7 @@ public class UserController implements Serializable {
         return "redirect:/editproduct/" + pid;
     }
 
-    @RequestMapping(value = "/product/add/uploadimagemulti", method = RequestMethod.POST)
+    @RequestMapping(value = {"/product/add/uploadimagemulti","/editproduct/uploadimagemulti"}, method = RequestMethod.POST)
     public String doUpload(HttpServletRequest request, HttpServletResponse response,
             @RequestParam("id") Integer id,
             @RequestParam("imagefile") List<MultipartFile> multipartFile) {

@@ -123,7 +123,7 @@
                                                             <label class="control-label col-sm-3 " for="categoryId">Kateqoriya:</label>
                                                             <div class="col-sm-8"> 
                                                                 <form:select id="categoryId" class="form-control" path="categoryId.catId">
-                                                                    <form:option value="NONE"  label="Kateqoriya seçimi"></form:option>
+                                                                    <%--<form:option value="NONE"  label="Kateqoriya seçimi"></form:option>--%>
                                                                     <form:options  items="${categoryList}" itemValue="catId" itemLabel="name" />
                                                                 </form:select>
                                                                 <form:errors path="categoryId.catId" class="control-label" />
@@ -137,7 +137,7 @@
                                                             <label class="control-label col-sm-3 " for="brandId">Brend:</label>
                                                             <div class="col-sm-8"> 
                                                                 <form:select class="form-control" path="brandId.id">
-                                                                    <form:option value="NONE"  label="Brend seçimi"></form:option>
+                                                                    <%--<form:option value="NONE"  label="Brend seçimi"></form:option>--%>
                                                                     <form:options  items="${brandList}" itemValue="id" itemLabel="name" />
                                                                 </form:select>
                                                                 <form:errors path="brandId.id" class="control-label" />
@@ -151,7 +151,7 @@
                                                             <label class="control-label col-sm-3 " for="genderId.genderId">Cins:</label>
                                                             <div class="col-sm-8"> 
                                                                 <form:select id="genderId.type" class="form-control" path="genderId.genderId">
-                                                                    <form:option value="NONE"  label="Cinsi seçin"></form:option>
+                                                                    <%--<form:option value="NONE"  label="Cinsi seçin"></form:option>--%>
                                                                     <form:options  items="${genderList}" itemValue="genderId" itemLabel="type" />
                                                                 </form:select>
                                                                 <form:errors path="genderId.genderId" class="control-label" />
@@ -218,7 +218,7 @@
                                             <c:forEach items="${product.productImageCollection}" var="imgs">
                                                 <div class="col-sm-4 col-lg-4 col-md-4" style="width: 300px; height: 300px">
                                                     <img style="max-height: 300px;max-width: 300px;" img src="${pageContext.servletContext.contextPath}${imgs.imgName}"/>
-                                                    <a href="<c:url value="/admin/productimg/${imgs.detId}/${product.PId}/delete"/>"  class="delete btn btn-danger"><em class="fa fa-trash"></em></a> 
+                                                    <a href="<c:url value="/productimg/${imgs.detId}/${product.PId}/delete"/>"  class="delete btn btn-danger"><em class="fa fa-trash"></em></a> 
                                                 </div>
                                             </c:forEach>
                                         </div>
